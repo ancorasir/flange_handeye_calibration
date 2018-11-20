@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<launch>
+    <!-- Run PhoXi Control -->
+    <node name="PhoXiControl" pkg="phoxi_camera" type="run_phoxi_control.sh" />
+
+    <!-- Launch phoxi_camera launch file -->
+    <include file="$(find phoxi_camera)/launch/phoxi_camera.launch"/>
+
+    <!-- Run ROS interface class tests -->
+    <test test-name="RosInterfaces" pkg="phoxi_camera" type="test_phoxi_camera_ros_interfaces.py" />
+</launch>

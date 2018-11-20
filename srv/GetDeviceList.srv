@@ -1,0 +1,5 @@
+---
+int64 len
+string[] out
+string message
+bool success

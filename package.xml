@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<package>
+  <name>phoxi_camera</name>
+  <version>2.0.0</version>
+  <description>The phoxi_camera is a package that enables interfacing Photoneo Phoxi Scanner/Camera from ROS</description>
+
+  <author>Photoneo s.r.o</author>
+
+  <maintainer email="support@photoneo.com">Photoneo</maintainer>
+
+  <license>BSD</license>
+
+  <url>http://wiki.ros.org/phoxi_camera</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>message_generation</build_depend>
+  <build_depend>dynamic_reconfigure</build_depend>
+  <build_depend>pcl_ros</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>roslib</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>std_srvs</build_depend>
+  <build_depend>libpcl-all-dev</build_depend>
+  <build_depend>diagnostic_updater</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>eigen_conversions</build_depend>
+  <build_depend>cv_bridge</build_depend>
+
+  <run_depend>message_runtime</run_depend>
+  <run_depend>dynamic_reconfigure</run_depend>
+  <run_depend>pcl_ros</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>roslib</run_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>std_srvs</run_depend>
+  <run_depend>libpcl-all</run_depend>
+  <run_depend>diagnostic_updater</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>eigen_conversions</run_depend>
+  <run_depend>cv_bridge</run_depend>
+
+
+  <!-- Use test_depend for packages you need only for testing: -->
+  <test_depend>rostest</test_depend>
+  <test_depend>gtest</test_depend>
+
+</package>

@@ -1,0 +1,10 @@
+<launch>
+    <arg name="num_of_iteration" default="4" />
+    <arg name="image_path" default="/home/bionicdl/calibration_images/im" />
+    <node pkg="phoxi_camera" type="phoxi_camera_cal_camShooter" name="phoxi_camera_cal_CamShooter" output="screen">
+        <param name="num_of_iteration" type="int" value="$(arg num_of_iteration)" />
+    </node>
+    <node pkg="phoxi_camera" type="phoxi_camera_cal_listener" name="phoxi_camera_cal_listener" output="screen">
+        <param name="image_path" type="string" value="$(arg image_path)" />
+    </node> 
+</launch>

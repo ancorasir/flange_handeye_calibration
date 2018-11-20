@@ -1,0 +1,4 @@
+---
+PhoXiSize[] supported_capturing_modes
+string message
+bool success

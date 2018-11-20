@@ -1,0 +1,7 @@
+geometry_msgs/Transform transform
+uint8 coordinates_space     # 1 = CameraSpace, 2 = MountingSpace, 3 = MarkerSpace, 4 = RobotSpace, 5 = CustomSpace
+bool set_space              # If true then set coordinates_space to to PhoXi Control.
+bool save_settings          # If true then settings will persist after restart of PhoXi Control.
+---
+string message
+bool success

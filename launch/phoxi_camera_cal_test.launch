@@ -1,0 +1,10 @@
+<launch>
+    <arg name="im_path" default="/home/bionicdl/calibration_images/im22.PCD" />
+    <arg name="passthrough_min" default="0.01" />
+    <arg name="passthrough_max" default="0.1" />
+    <node pkg="phoxi_camera" type="phoxi_camera_cal_test" name="phoxi_camera_cal_test" output="screen">
+        <param name="im_path" type="string" value="/home/bionicdl/calibration_images/im22.PCD" />
+        <param name="passthrough_min" type="double" value="$(arg passthrough_min)" />
+        <param name="passthrough_max" type="double" value="$(arg passthrough_max)" />
+    </node> 
+</launch>

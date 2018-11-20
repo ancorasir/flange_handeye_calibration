@@ -1,0 +1,4 @@
+<launch>
+    <include file="$(find phoxi_camera)/launch/display_urdf.launch"/>
+    <include file="$(find phoxi_camera)/launch/phoxi_camera.launch"/>
+</launch>

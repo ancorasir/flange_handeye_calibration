@@ -1,0 +1,4 @@
+uint8 coordinates_space
+---
+string message
+bool success

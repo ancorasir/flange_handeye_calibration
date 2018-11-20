@@ -1,0 +1,4 @@
+int64 in        # id of scan returned by trigger_image service. If id is negative new frame is taken (no need to call trigger_image service).
+---
+string message
+bool success
