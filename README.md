@@ -1,2 +1,2 @@
-# flange-based_hand-eye_calibration
-
+# fast_cal
+Software framewrok for fast calibration

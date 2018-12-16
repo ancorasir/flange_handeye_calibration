@@ -7,30 +7,26 @@ import geometry_msgs.msg
 from std_msgs.msg import String
 import rosbag
 import numpy as np
-from matplotlib import pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 import tf 
 import os 
 import random
 import cv2
 import pcl 
+from calibration import circle_fitting, calibrate
+from utils import write_data, read_data
+import time 
+from utils import H2trans_rot
+from timeout_decorator import timeout 
+import multiprocessing as mp
+import copy 
 
-NUM_ATTEMPS = 1
-PLANNER_NAME = "RRTConnect"
-MAX_PLAN_TIMES = 2
-mode = "cal"
+# # mode: cal, test, debug, move
+mode = "test"
+use_mp = False
 
-# FIXME: Unfinished part
-def get_bound(x,y,z):
-  return tf.transformations.quaternion_from_euler(x, y, z, axes='sxyz')
-
-# def transfer(H):
-#   trans = H[0:3,2]
-#   rot_mat = H[0:3,0:3]
-#   rot = tf.transformations.euler_from_matrix(R,'sxyz')
-#   return trans, rot 
 
 def copy_pose(original_pose):
+  ''' deep copy for pose object'''
   new_pose = geometry_msgs.msg.Pose()
   new_pose.position.x = original_pose.position.x
   new_pose.position.y = original_pose.position.y
@@ -43,107 +39,87 @@ def copy_pose(original_pose):
 
   return new_pose
 
-# TODO
-def get_path_all_around(current_pose):
+def get_path_zigzag(path_, object_points):
   ''' 
-  Get a path that mosty cover the configuration area of robot arm
-
-  Target Representation:
-    geometry_msgs -> Pose.msg:
-      Point position (float64 x y z)
-      Quaternion orientation (float64 w+xi+yj+zk)
+    Generate a zig-zag path along provided points
+      -Input: 
+        * path: path made up of provided fix point 
+        * object_points: list of 3D vector, representing points in the path 
+      -Output:
+        * zig-zag path
   '''
-  pass
+  path = copy.deepcopy(path_)
+  zig_zag_path = []
+  used_list = []
 
-# FIXME: Unfinished codes
-def get_path_random(current_pose):
-  ''' 
-  Get a path that moving slightly around current position in a zig zag manner
+  num_points = len(object_points)
+  for i in range(num_points):
+    for j in range(i+1, num_points):
+      used_list.append([i,j])
 
-  Target Representation:
-      geometry_msgs -> Pose.msg:
-        Point position (float64 x y z)
-        Quaternion orientation (float64 w+xi+yj+zk)
+  for i,line in enumerate(used_list):
+    print("Generating Points:%d/%d"%(i, len(used_list)))
+    point_start = np.array(object_points[line[0]])
+    point_end = np.array(object_points[line[1]])
+    diff = point_start - point_end
+
+    path_point = []
+
+    for k in [0.25, 0.5, 0.75]:
+      point = point_start + k * diff 
+      path_point.append(point)
+
+
+    temp_zig_zag_path, null_object = get_fix_path(object_points=path_point, needTurbulance=True)
+    for points in temp_zig_zag_path:
+      zig_zag_path.append(points)
+
+  return zig_zag_path
+
+def get_fix_path(data_path=None, object_points=None, needTurbulance=False):
+    ''' Add fix pose to the path
+          -Input
+            * data_path      [optional]: path of data file, if provided, will read target pose form file 
+            * object_points  [optional]: a list of points, if provided, will add pose in the list the target path 
+            * needTrubulance [optional]: if provided, will add random turbulance to path  
+    '''
+    path = []
+    current_pose = group.get_current_pose().pose
+    if data_path:
+      object_points = read_data(data_path, type="target")
+    
+
+    for object in object_points:
+      new_pose = copy_pose(current_pose)
+      new_pose.position.x = object[0]
+      new_pose.position.y = object[1]
+      new_pose.position.z = object[2]
+      if needTurbulance: 
+        new_pose.position.x += (random.random()/10 - 0.05)*0.6
+        new_pose.position.y += (random.random()/10 - 0.05)*0.6
+        new_pose.position.z += (random.random()/10 - 0.05)*0.6
+
+      if new_pose.position.z < 0.2:
+        new_pose.position.z = 0.2
+        
+
+      path.append(new_pose)
+    
+
+    return path, object_points
+
+
+def get_image(im_name):
+  ''' Shoot a photo and save to the given path 
+      - Input: im_name(path of the image)
   '''
-  # bound = pose_bound(x, y, z, yaw, pitch, roll)# create pose bound
-  path = []
-  new_pose = current_pose
-  for i in range(4):
+  print("geting image with name:%s"%im_name)
+  status = os.system('sh /home/bionicdl/catkin_ws/src/fast_cal/image_cap.sh %s'%im_name)
+  return status 
 
-    if (random.random() > 0.3):
-      new_pose.position.x += 0.03 * random.random()
-
-    if (random.random() > 0.4):
-      new_pose.position.y += 0.03 * random.random()
-
-    new_pose.position.z +=  0.03 * random.random()
-      
-    path.append(new_pose)
-  return path
-
-# FIXME: Unfinished codes
-def get_path_zigzag(current_pose):
-  ''' 
-  Get a path that moving slightly around current position in a zig zag manner
-
-  Target Representation:
-      geometry_msgs -> Pose.msg:
-        Point position (float64 x y z)
-        Quaternion orientation (float64 w+xi+yj+zk)
-  '''
-  # bound = pose_bound(x, y, z, yaw, pitch, roll)# create pose bound
-  path = []
-  new_pose = copy_pose(current_pose)
-  new_pose.position.x -= 0.01
-  new_pose.position.y -= 0
-  new_pose.position.z -= 0.01
-  path.append(new_pose)
-
-
-  new_pose = copy_pose(current_pose)
-  new_pose.position.x += 0
-  new_pose.position.y += 0.01
-  new_pose.position.z -= 0.02
-  path.append(new_pose)
-
-  new_pose = copy_pose(current_pose)
-  new_pose.position.x -= 0.01
-  new_pose.position.y -= 0.01
-  new_pose.position.z -= 0.03
-  path.append(new_pose)
-
-  new_pose = copy_pose(current_pose)
-  new_pose.position.x += 0.01
-  new_pose.position.y += 0.02
-  new_pose.position.z -= 0
-  path.append(new_pose)
-
-  
-
-  # new_pose = copy_pose(current_pose)
-  # new_pose.position.x += 0.02
-  # new_pose.position.y += 0.02
-  # new_pose.position.z -= 0.04
-  # path.append(new_pose)
-  return path
-
-def get_path_test(current_pose):
-  new_pose = copy_pose(current_pose)
-  path = []
-  new_pose.position.y +=  0.03
-  path.append(new_pose)
-
-  new_pose = copy_pose(current_pose)
-  new_pose.position.z += 0.06
-  path.append(new_pose)
-  # new_pose.position.z += 0.02
-  # path.append(new_pose)
-  print(path)
-  return path 
-
-def plan_execute(target, index, mode):
+def plan_execute(target, mode, index=None):
+  ''' Plan and execute for given target. Shoot and store image if in cal mode '''
   plan_list = []
-  print(target)
   group.set_start_state_to_current_state()
   group.clear_pose_targets()
   group.set_pose_target(target)
@@ -153,129 +129,260 @@ def plan_execute(target, index, mode):
       continue 
     plan_list.append(plan)
     rospy.sleep(0.5)
-  print(group.get_current_pose().pose)
+  
   if len(plan_list) == 0:
     print("Fail to get any plan")
-    return
+    return False
 
-
+  # Excute the plan and motion
+  print("Moving to target:")
+  print(target)
   group.execute(plan_list[0])
   rospy.sleep(5)
-  if mode == "cal":
-    im_name = "im" + str(index)
-    status = os.system('sh /home/bionicdl/catkin_ws/src/fast_cal/image_cap.sh %s'%im_name)
-    # print(status)
+  return 
 
-def write_pose2data(file_name, pose, index):
-  f = open(file_name, 'a')
-  f.write('index:%d\n'%index)
-  f.write('position:\nx:%f\ny:%f\nz:%f\norientation:\nw:%f\nx:%f\ny:%f\nz:%f\n\n'
-  %(pose.position.x,pose.position.y, pose.position.z, 
-    pose.orientation.w, pose.orientation.x, pose.orientation.y, pose.orientation.z ))
-  f.write('\n')
-  f.close()
 
 def get_target():
     '''
         Get coordinate of corner points from camera frame and convert it to robot base frame 
     '''
+    rospy.sleep(5)
     img = cv2.imread("/home/bionicdl/calibration_images/imorigin.jpg")
     
     corners = []
     patternsize = tuple([8,11])
     count = 0
-    # rows, cols, channels = img.shape
-    # print(img.shape)
+    cv2.imwrite("/home/bionicdl/calibration_images/img_test.png", img) 
     ret, corners = cv2.findChessboardCorners(img, patternsize, count)
-    # print(corners)
     img_new = cv2.drawChessboardCorners(img, patternsize, corners, ret)
     cv2.imwrite("/home/bionicdl/calibration_images/chess_plus.png", img_new) 
-    cloud = pcl.load("/home/bionicdl/calibration_images/im.ply")    
-    i = 0
+    cloud = pcl.load("/home/bionicdl/calibration_images/im.ply")
     target = []
     for coord in corners:
-        target.append(cloud.get_point(coord[0,0],coord[0,1]))
-    return target
+      # get the 3D coordinate of 2D point and add it to target list
+      target.append(list(cloud.get_point(coord[0,0], coord[0,1])))
+    return target 
 
 
-def get_transform(file_name):
-    '''
-        Get the transformation matrix 
-    '''
-    print(file_name)
-    f = open(file_name, 'r')
-    get = False
-    while(True):
-        line = f.readline()
-        if line[0] == "H":
-            break
-    rows = []
-    for i in range(3):
-        rows.append(f.readline());
+
+class Worker(mp.Process):
+    def __init__ (self, inQ, outQ, random_seed):
+        super(Worker, self).__init__(target=self.start)
+        self.inQ = inQ
+        self.outQ = outQ
     
-    H = []
-    for row in rows:
-        row = row.split('[')[2]
-        row = row.split(']')[0]
-        row = row.split(' ')
-        row_num = []
-        for item in row:
-            if item!='':
-                row_num.append(float(item))
-        # H.append([float(row[1]), float(row[2]), float(row[4]), float(row[5])])
-        H.append(row_num)
-    return np.asmatrix(H)   
-
-# initialize moveit_commander and rospy node
-moveit_commander.roscpp_initialize(sys.argv)
-rospy.init_node('move_group_python_interface_tutorial',
-                  anonymous=True)
-
-# instantiate a RobotCommander object
-robot = moveit_commander.RobotCommander()
-# instantiate a Planning SceneInterface object
-scene = moveit_commander.PlanningSceneInterface()
-# Instantiate a Move Group Commander object
-group = moveit_commander.MoveGroupCommander("manipulator_i5")
-# publish trajectory to RViz
-display_trajectory_publisher = rospy.Publisher(
-                                      '/move_group/display_planned_path',
-                                 moveit_msgs.msg.DisplayTrajectory,
-                                      queue_size=20)
+    def run (self):
+        while True:
+            task = self.inQ.get()  
+            im_name, index, p_robot = task 
+            p_camera = circle_fitting(im_name, index)
+            print("Worker Get Result")
+            if p_camera:
+              self.outQ.put([index, p_camera, p_robot])  
+            else:
+              self.outQ.put(False)
 
 
-# specify planner
-group.set_planner_id(PLANNER_NAME+'kConfig1')
-group.set_num_planning_attempts(1)
-group.set_planning_time(5)
+def create_worker (num):
+    for i in range(num):
+        worker.append(Worker(mp.Queue(), mp.Queue(), np.random.randint(0, 10 ** 9)))
+        worker[i].start()
 
-file_name = "/home/bionicdl/calibration_images/data.txt"
-if mode == "cal":
-  path_zigzag = get_path_zigzag(group.get_current_pose().pose)
-  print("$$$$$$$$$$$$$$$$$$")
-  print(path_zigzag)
+def finish_worker ():
+    for w in worker:
+        w.terminate()
 
-  os.system('touch %s'%file_name)
+def move_shoot(target, mode):
+  ''' Move to target and shoot an image (named after current timestamp) '''
+  current_time = time.time()
+  index = str(int(current_time)) + str(current_time - int(current_time)).replace(".","_")
+  plan_execute(target, mode, index)  
+  im_name = data_path + "im"
+  # print(im_name)
+  result = get_image(im_name)
+  time.sleep(5)
+  os.system('mv %s %s'%(im_name+".ply", im_name+index+".ply"))
+  os.system('mv %s %s'%(im_name+".PCD", im_name+index+".PCD"))
+  im_name+= index
+  current_pose = group.get_current_pose().pose
+  p_robot = [current_pose.position.x,current_pose.position.y, current_pose.position.z, current_pose.orientation.x, current_pose.orientation.y, current_pose.orientation.z, current_pose.orientation.w]
 
-  t = 1
-  for target in path_zigzag:
-    plan_execute(target,t, mode)
-    write_pose2data(file_name, target, t)
-    t = t+1
+  return im_name, index, p_robot
 
-if mode == "test":
-  im_name="im_test"
-  status = os.system('sh /home/bionicdl/catkin_ws/src/fast_cal/image_cap.sh %s'%im_name)
-  target_points = get_target()
-  H = get_transform(file_name)
-  print(H)
-  print("######")
-  for target in target_points:
-    target = np.asmatrix(target)
-    target_real = np.dot(target, H)
-    print(target_real)
-    print("######")
+if __name__ == "__main__":
+  NUM_ATTEMPS = 1
+  PLANNER_NAME = "RRTConnect"
+  MAX_PLAN_TIMES = 2
+  # mode: cal, test, debug, move
+  # mode = "move"
+  # initialize moveit_commander and rospy node
+  moveit_commander.roscpp_initialize(sys.argv)
+  rospy.init_node('move_group_python_interface_tutorial',
+                    anonymous=True)
+
+  # instantiate a RobotCommander object
+  robot = moveit_commander.RobotCommander()
+  # instantiate a Planning SceneInterface object
+  scene = moveit_commander.PlanningSceneInterface()
+  # Instantiate a Move Group Commander object
+  group = moveit_commander.MoveGroupCommander("manipulator_i5")
+  # publish trajectory to RVizindex
+  display_trajectory_publisher = rospy.Publisher(
+                                        '/move_group/display_planned_path',
+                                  moveit_msgs.msg.DisplayTrajectory,
+                                        queue_size=20)
+
+
+  # specify planner
+  group.set_planner_id(PLANNER_NAME+'kConfig1')
+  group.set_num_planning_attempts(1)
+  group.set_planning_time(5)
+  
+  data_path = "/home/bionicdl/calibration_images/"  
+  
+  data_file = data_path + "data.txt"
+
+  if mode == "debug":
+    '''Debug mode: print and write current pose '''
+    print(group.get_current_pose().pose)
+
+  
+  elif mode == "cal" or mode == "move":
+    ## Calibrate mode 
+    path, object_points = get_fix_path(data_path=data_path+"target.txt")
+
+    # Create Multiple Process
+    worker = []
+    worker_num = len(path)
+    create_worker(worker_num)
+    free_worker_pipe = list(range(worker_num))
+    working_worker_pipe = []
+
+    # Get path for calibration 
+    if mode == "cal":
+      zig_zag_path = get_path_zigzag(path, object_points)
+
+    os.system('touch %s'%data_file)
+
+    it = 0
+
+    # coarse calibration
+    # for i in range(len(path)):
+    #   target = path[i]    
+    #   im_name,index, p_robot = move_shoot(target, mode)
+    #   worker[i%worker_num].inQ.put([im_name, ("flag"+str(i)), p_robot])
     
-    # plan_execute(target, t, mode)
+    # for i in range(len(path)):
+    #     result = worker[i%worker_num].outQ.get()
+    #     index, p_camera, p_robot = result
+    #     write_data(data_file, [p_robot, p_camera], index, type="point_pair")
 
+    H_coarse, error_coarse = calibrate(data_file)
+    print("Coarse Calibrate Finished")
+    print(H_coarse)
+
+    H_final = copy.deepcopy(H_coarse)
+    error_min = error_coarse
+    if not use_mp:
+      finish_worker()
+
+    timmer = time.time()
+    # fine calibration 
+    if mode == "cal":
+      for idx, target in enumerate(zig_zag_path):
+        print("##### Target: %d/%d #####"%(idx+1,len(zig_zag_path)))
+
+        im_name, index, p_robot = move_shoot(target, mode)
+        if not use_mp:
+          p_camera = circle_fitting(im_name, index)
+          if p_camera:
+            write_data(data_file, [p_robot, p_camera], index, type="point_pair")
+            H, error = calibrate(data_file)
+            # iteration of transformation matrix 
+            if error < error_min:
+              H_final = H
+              error_min = error 
+              print("New H")
+              print(H)
+              print(error_min)
+
+
+        # multiple process 
+        if use_mp:
+          print("MP Stack: Free pipe & Working Pipe")
+          print(free_worker_pipe)
+          print(working_worker_pipe)
+          if len(working_worker_pipe) > 0:
+            working_index = working_worker_pipe[0]
+            print("Working Index :%d"%working_index)
+            getResult = True
+            
+          if (time.time() - timmer > 60 or len(free_worker_pipe) == 0) and len(working_worker_pipe) > 0:
+              if(len(free_worker_pipe) == 0):
+                print("Process Congested, Please Wait for the processing Result")
+              result = worker[working_index].outQ.get()
+              getResult = True
+              timmer = time.time()
+          else:
+              getResult = False
+
+            
+          if getResult and result:
+            free_worker_pipe.append(working_index)
+            working_worker_pipe.remove(working_index)
+            index, p_camera, p_robot = result
+            write_data(data_file, [p_robot, p_camera], index, type="point_pair")
+            H, error = calibrate(data_file)
+            # iteration of transformation matrix 
+            if error < error_min:
+              H_final = H
+              error_min = error 
+              print("New H")
+              print(H)
+              print(error_min)
+        
+          free_index = free_worker_pipe[0]
+          worker[free_index].inQ.put([im_name, index, p_robot])
+          free_worker_pipe.remove(free_index)
+          working_worker_pipe.append(free_index)
+
+      if use_mp:
+        finish_worker()
+
+      write_data(data_file, H_final ,"H", type="mat")
+      trans, rot = H2trans_rot(H)
+      write_data(data_path, trans, "Trans", type="vec")
+      write_data(data_path, rot, "Rot", type="vec")
+
+  elif mode == "test":
+      #Testing mode: obtain coordinate of a chessboard (assumed to be visible), and move the robot arm above
+
+      im_name="im_test"
+      # obatin image 
+      result = get_image(im_name)
+      rospy.sleep(10)
+      # get target coordinate 
+      target_cam = get_target()
+      target_cam = np.matrix(np.concatenate((np.array(target_cam).transpose(), np.ones([1,len(target_cam)])),axis=0))
+      # get transformation matrix
+      H, error = calibrate(data_file)
+      write_data(data_file, H,"H", type="mat")
+      H = read_data(data_file, "H")
+      print(H)
+      # get target pose in robot base
+      target_r = np.dot(H, target_cam)
+      # transform from homogeneous coordinate to Cartesian coordinate
+      target_r[:3,:] = target_r[:3,:]/target_r[3,:]
+      target_r = target_r[:3,:]
+      target_r = list(target_r.transpose())
+      # execution for each task 
+      for target in target_r:
+        print(target)
+        current_pose = group.get_current_pose().pose
+        current_pose.position.x = target[0,0]
+        current_pose.position.y = target[0,1]
+        plan_execute(current_pose, mode)
+        str = raw_input("Press to continue (press d to quit)Enter your input:")
+        if str == "d":
+          break 
 

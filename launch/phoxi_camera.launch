@@ -1,5 +1,5 @@
 <launch>
-    <node pkg="phoxi_camera" type="phoxi_camera" name="phoxi_camera" output="screen">
+    <node pkg="phoxi_camera" type="phoxi_camera" name="phoxi_camera">
         <rosparam file="$(find phoxi_camera)/config/phoxi_camera.yaml" command="load"/>
     </node>
 </launch>

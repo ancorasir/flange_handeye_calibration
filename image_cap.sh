@@ -1,6 +1,6 @@
 # num_iteration = $1
 num_interation="1"
-im_path="/home/bionicdl/calibration_images/$1"
+im_path= $1
 roslaunch phoxi_camera phoxi_camera.launch& 
 sleep 2s
 echo "start"

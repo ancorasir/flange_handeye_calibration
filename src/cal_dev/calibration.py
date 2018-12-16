@@ -6,258 +6,217 @@ import rospy
 from functools import reduce 
 import time 
 import tf
-# # p_base 
-# p_robot = np.array([[0.27265, -0.65591, 0.16760, 1],
-#                [0.35291, -0.65217, 0.13476, 1],
-#                [0.33833, -0.71059, 0.14230, 1],
-#                [0.27451, -0.71246, 0.13478, 1]])
-# p_robot = p_robot.transpose()
+# import multiprocessing as mp
+from utils import *
+from numpy.linalg import *
+import os 
 
+def circle_fitting(pointCloud_path, index=999):
+    ''' Obtain the center of the circle at the flange of robot arm
+        -Input: pointCloud_path (path of the point cloud), index(optional) 
+    '''
 
-def get_p_robot(file_name):
-    p_robot = []
-    f = open(file_name,'r')
-    reading = True
-    i = 0
-    while(reading):
-        line = f.readline()
-        if i >= 4:
-            break
-        if line.split(':')[0]=='index':
-            i +=1
-            f.readline()
-            x = float(f.readline().split(':')[1].strip())
-            y = float(f.readline().split(':')[1].strip())
-            z = float(f.readline().split(':')[1].strip())
-            p_robot.append([x, y, z, 1])
-    
-    p_robot = np.array(p_robot)
-    return p_robot.transpose()
+    # data_path = os.path.dirname((pointCloud_path) + "/data.txt")
+    # Get criteria from data file
+    data_path = "/home/bionicdl/calibration_images/data.txt"
+    if "flag" not in index:
+        criteria = read_data(data_path, "criteria")
+        # print("Get Criteria")
+        # print(criteria)
+    else:
+        criteria = None 
 
-def hand_eye_calibrate(cloud_path):
+    print("Path:")
+    print(pointCloud_path)
+    cloud_path = pointCloud_path
+    pointCloud_path += ".ply"
+    cloud = pcl.load(pointCloud_path)
 
-    time_set = []
-    for i in range(4):
-        time_set.append(time.time())
-        global p_camera
-        # load obtained point cloud
-        # cloud = pcl.load('./images/waypoint%s.ply'%(i+1))
-        cloud_name = cloud_path+str(i+1)+'.pcd'
-        print(cloud_name)
-        cloud = pcl.load(cloud_path+str(i+1)+'.ply')
-        time_set.append(time.time())
-        # TODO: PassThrough Filter
-        # roughly slicing for the point cloud 
-
-        passthrough = cloud.make_passthrough_filter()
-        # filtering in z axis from 380 to 435
-        filter_axis = 'z'
-        passthrough.set_filter_field_name(filter_axis)
-        # axis_min = 380
-        # axis_max = 435
-        axis_min = 0.25
-        axis_max = 0.47
-        passthrough.set_filter_limits(axis_min, axis_max)
-        cloud_filtered = passthrough.filter()
-        pcl.save(cloud_filtered, "%s.pcd"%(cloud_path+str(i)+'-'+str(axis_min)+'-'+str(axis_max)))
-        time_set.append(time.time())
-
-        
-        # TODO: Statistical outlier filter
-        # print("Statistical outlier filter:%d"%i)
-        outlier_filter = cloud_filtered.make_statistical_outlier_filter()
-        outlier_filter.set_mean_k(50)
-        outlier_filter.set_std_dev_mul_thresh(1.0)
-        cloud_filtered = outlier_filter.filter()
-        time_set.append(time.time())
-        pcl.save(cloud_filtered, "%s.pcd"%(cloud_path+str(i)+'-'+str(axis_min)+'-'+str(axis_max)+'_outlier'))
-        
-        # break 
-        # TODO: Euclidean Clustering
-        # print("Euclidean Clustering:%d"%i)
-        white_cloud = cloud_filtered
-        tree = white_cloud.make_kdtree()
-        ec = white_cloud.make_EuclideanClusterExtraction()
-        ec.set_ClusterTolerance(0.0003)    # Set tolerances for distance threshold 
-        ec.set_MinClusterSize(8000)
-        ec.set_MaxClusterSize(1500000)   # as well as minimum and maximum cluster size (in points)
-        ec.set_SearchMethod(tree)
-        cluster_indices = ec.Extract()
-        tool_index = []
-        time_set.append(time.time())
-        # print(len(cluster_indices))
-        # break 
-        
-        # select the tool0 plane has the largest number of points
-        # print("Clustering:%d"%i)
-        for cluster in cluster_indices:
-            if len(cluster)>len(tool_index):
-                tool_index = cluster
-        tool0 = white_cloud.extract(tool_index)
-        # pcl.save(tool0, "tool0_%s.pcd"%(i+1))
-        time_set.append(time.time())
-
-
-        # Ransac circle segmentation
-        # tool0 = cloud_filter
-        seg = tool0.make_segmenter()
-        # seg.set_model_type(pcl.SACMODEL_PLANE)
-        seg.set_model_type(pcl.SACMODEL_CIRCLE3D)
-        max_distance = 0.0002
-        seg.set_distance_threshold(max_distance)
-        seg.set_MaxIterations(10000)
-        seg.set_optimize_coefficients("true")
-        seg.set_method_type(6)
-        inliers, coefficients = seg.segment()
-        clc = tool0.extract(inliers, negative=False)
-        outliers = tool0.extract(inliers, negative=True)
-        points_list = []
-        for data in clc:
-            points_list.append([data[0], data[1], data[2], 0.5])
-        
-        x0 = 100
-        x1 = -100
-        y0 = 100
-        y1 = -100
-        z0 = 100
-        z1 = -100
-        index_data = 0
-        for data in outliers:
-            points_list.append([data[0], data[1], data[2], 100])
-        center = coefficients[:3]
-        points_list.append([center[0], center[1], center[2], 100])
-        #     if index_data == 0:
-        #         x0 = x1 = data[0]
-        #         y0=y1=data[1]
-        #         z0=z1=data[2]
-
-        #     if data[0] > x1:
-        #         x1 = data[0]
-        #     if data[0] < x0:
-        #         x0 = data[0]
-            
-        #     if data[1] > y1:
-        #         y1 = data[1]
-        #     if data[1] < y0:
-        #         y0 = data[1]
-
-        #     if data[2] > z1:
-        #         z1 = data[2]
-        #     if data[2] < z0:
-        #         x0 = data[2]
-            
-            
-            
-
-
-        
-        print("CIRCLE")
-        print("x:%f-%f  y:%f-%f  z:%f-%f"%(x0,x1,y0,y1,z0,z1))
-        print()
-
-        print("Analog Center:")
-        print("x:%f  y:%f  z:%f"%( (x0+x1)/2, (y0+y1)/2, (z0+z1)/2))
-        print("\n\n")
-        
-
-        
-        tool0_c = pcl.PointCloud_PointXYZRGB()
-        tool0_c.from_list(points_list)
-        pcl.save(tool0_c, "%s.pcd"%(cloud_path+"tool_c"+str(i+1)))
-        time_set.append(time.time())
-        
-        p_camera.append(coefficients[:3])
-        # print("Cofficient")
-        # print(coefficients)
-        print("Center")
-        print(coefficients[:3])
-        time_set.append(time.time())
-    return p_camera
-
-
-# R = H[:3,:3]
-# t = H[:3, 3]
-# al, be, ga = tf.transformations.euler_from_matrix(R, 'sxyz')
-# [16.695629119873047, -16.15144157409668, 413.2391662597656, 29.98028564453125, -0.015968363732099533, 0.019328217953443527, -0.9996856451034546]
-
-def write_data_H(file_name, H):
-  f = open(file_name, 'a')
-  f.write("H\n")
-  for i in range(4):
-      f.write("%s\n"%(str(H[i])))
-  f.write('\n')
-  f.close()
-
-
-def transfer(H):
-  trans = H[2,0:3]
-  rot_mat = H[0:3,0:3]
-#   print(rot_mat)
-  rot = tf.transformations.euler_from_matrix(rot_mat,'sxyz')
-  return trans, rot 
-
-
-if __name__ == '__main__' : 
-    p_camera = []
-    file_name = "/home/bionicdl/calibration_images/data.txt"
-    p_robot = get_p_robot(file_name)
-    # # print("Robot Pose")
-    # # print(p_robot)
-    cloud_path = "/home/bionicdl/calibration_images/im"
-    p_camera2 =  hand_eye_calibrate(cloud_path)
-
-
-    # print("P Camera")
-    # print(p_camera)
-    # print("P CAM 2")
-    # print(p_camera2)
-    # p_camera = [[-0.019356120377779007, -0.014356721192598343, 0.29263219237327576],
-    #             [0.01416813675314188, -0.03466275334358215, 0.3105636239051819],
-    #             [-0.0348646454513073, -0.053492434322834015, 0.39297932386398315],
-    #             [0.01838613487780094, -0.0235764030367136, 0.3266702890396118]
-    #             ]
-    p_camera_ = np.matrix(np.concatenate((np.array(p_camera).transpose(), np.ones([1,4])),axis=0))
-    print(p_camera_)
-    p_camera_reverse = p_camera_.getI()
-    # print(p_camera_reverse)
-    H = np.matmul(p_robot, p_camera_reverse)
-    trans, rot = transfer(H)
-    print("Translation")
-    print(trans)
-    print("Rotate")
-    print(rot)
-
-    write_data_H(file_name, H)
-    print("### Resut Origin")
-    print("H")
-    print(H)
-    print("Transform")
-    print(np.matmul(H,p_camera))
-    print("robot")
-    print(p_robot)
-    print('cam')
-    print(p_camera_)
-
-    # p_camera_ = np.matrix(np.concatenate((np.array(p_camera).transpose(), np.ones([1,4])),axis=0))
-    # # print(p_camera_)
-    # p_camera_reverse = p_camera_.getI()
-    # # print(p_camera_reverse)
-    # H = np.dot(p_robot, p_camera_reverse)
-    # write_data_H(file_name, H)
-
-    # print("### Resut New")
-    # print("H")
-    # print(H)
-    # print("Transform")
-    # print(np.matmul(H,p_camera_))
-    # print("robot")
-    # print(p_robot)
-    # print('cam')
-    # print(p_camera_)
+    # Passthrough Filter 
+    print("Passthrough Filter:%s"%str(index))
+    passthrough = cloud.make_passthrough_filter()
+    filter_axis = 'z'
+    passthrough.set_filter_field_name(filter_axis)
+    axis_min = 0.25
+    axis_max = 0.47
+    passthrough.set_filter_limits(axis_min, axis_max)
+    cloud_filtered = passthrough.filter()
+    print("Path Through for %s"%str(index))
+    # pcl.save(cloud_filtered, "%s.pcd"%(cloud_path+"pass"+str(index)))
 
     
+    # Statistical Outlier Filter
+    print("Outlier Filter :%s"%str(index))
+    outlier_filter = cloud_filtered.make_statistical_outlier_filter()
+    outlier_filter.set_mean_k(50)
+    outlier_filter.set_std_dev_mul_thresh(1.0)
+    cloud_filtered = outlier_filter.filter()
+    # pcl.save(cloud_filtered, "%s.pcd"%(cloud_path+"ol"+str(index)))
 
+
+    # Euclidean Clustering 
+    print("Euclidean Clustering:%s"%str(index))
+    white_cloud = cloud_filtered
+    tree = white_cloud.make_kdtree()
+    ec = white_cloud.make_EuclideanClusterExtraction()
+    ec.set_ClusterTolerance(0.001)    # Set tolerances for distance threshold 
+    ec.set_MinClusterSize(2000)
+    ec.set_MaxClusterSize(100000)   # as well as minimum and maximum cluster size (in points)
+    ec.set_SearchMethod(tree)
+    cluster_indices = ec.Extract()
+    tool_index = []
+    
+    
+    min_height = 10010
+    current_length = 0
+
+    # Pick out cluseter on the top 
+    for cluster in cluster_indices:
+        cloud = white_cloud.extract(cluster)
+        cloud_array = np.array(cloud)
+        length = cloud_array.shape[0]
+        height = cloud_array[:,2].min()
+        if height < min_height:
+            min_height = height 
+            tool_index = cluster
+
+    # Check number of points in the plane to match with criteria 
+    if criteria and len(tool_index) < criteria[1] * 0.5:
+        print("Error: Too Less Point in the plane")
+        return False 
+    tool0 = white_cloud.extract(tool_index)
+    # pcl.save(tool0, "%s.pcd"%(cloud_path+"clustering"+str(index)))
+
+    if "flag" in index:
+        # Write Criteria For flag points 
+        write_data(data_path, len(tool_index), "criteria:plane", type="vec" )
+
+
+
+    # Ransac circle segmentation
+    print("RANSAC :%s"%str(index))
+    seg = tool0.make_segmenter()
+    seg.set_model_type(pcl.SACMODEL_CIRCLE3D)
+    max_distance = 0.0002
+    seg.set_distance_threshold(max_distance)
+    seg.set_MaxIterations(10000)
+    seg.set_optimize_coefficients("true")
+    seg.set_method_type(6)
+    inliers, coefficients = seg.segment()
+    clc = tool0.extract(inliers, negative=False)
+    outliers = tool0.extract(inliers, negative=True)
+    points_list = []
+    for data in clc:
+        points_list.append([data[0], data[1], data[2], 0.5])
+    
+    index_data = 0
+    for data in outliers:
+        points_list.append([data[0], data[1], data[2], 255])
+    center = coefficients[:3]
+    points_list.append([center[0], center[1], center[2], 100])
+
+    # Check inliers in the circle to match with criteria 
+    # if criteria and (len(inliers) < int(criteria[0]*0.85) or int(len(inliers) < criteria[0]*1.3)):
+    #     print("Error: Circle Size In-Correct")
+    #     return False 
+
+    if "flag" in index:
+        # Write Criteria For flag points 
+        write_data(data_path, len(inliers), "criteria:circle", type="vec" )
+        
+    
+    tool0_c = pcl.PointCloud_PointXYZRGB()
+    tool0_c.from_list(points_list)
+    pcl.save(tool0_c, "%s.pcd"%(cloud_path+"tool_c"))
     
 
+    return coefficients[:3]
+
+def pose_diff(H1, H2):
+    '''Compute the pose difference of 2 given transform matrix 
+        -Input: H1, H2 for the two matrix to be compared
+        -Output: float number of sum(H1*H2^(-1))
+    '''
+    H1 = np.mat(H1)
+    H2 = np.mat(H2)
+    diff = np.matmul(H1, H2.I)
+    return diff
+
+def get_calibrate(num_point):
+    def calibrate_dlm(p_robot_mat, p_camera_mat):
+        ''' Calibrate using 4 points '''
+        # print("Det p_robot:{}".format(det(p_robot_mat)))
+        # print("Det p_camera:{}".format(det(p_camera_mat)))
+        H = np.matmul(p_robot_mat, p_camera_mat.getI())
+        return H
+        
+    def calibrate_ls(p_robot_mat, p_camera_mat):
+        ''' Calibtrate using least square solution points '''
+        # H = np.dot(np.dot(np.dot(p_camera_mat.T,p_camera_mat).getI(), p_camera_mat.T), p_robot_mat)
+        pass 
+        # return H 
+
+    def calibrate_svd(p_robot_mat, p_camera_mat):
+        ''' Calibrate using svd'''
+        pass 
 
 
+    # def calibrate_16(p_robot_mat, p_camera_mat):
+    #     ''' Calibration using 16 points '''
+    #     pass     
+    if num_point == 4:
+        return calibrate_dlm
+    elif num_point > 4:
+        return calibrate_ls
+    else:
+        return False
+
+        
+def ransac(point_pair_list, num_point=4, max_iteration=10):
+    ''' A RANSAC framework for calibration '''
+    p_camera_total, p_robot_total = pp2mat(point_pair_list)
+    calibrate = get_calibrate(num_point)
+
+    def error_test(H):
+        error = np.sum(p_robot_total - np.matmul(H, p_camera_total))
+        return abs(error)
+
+    len_list = len(point_pair_list)
+
+    # Get maximum allowed iteration number 
+    max_it_allowed = int(math.factorial(len_list)/(math.factorial(len_list-num_point)*math.factorial(num_point)) / 3)
+    if max_iteration > max_it_allowed:
+        max_iteration = max_it_allowed
+
+    used_list = []
+    min_error = 10010
+    H_final = []
+    for i in range(max_iteration):
+        result = get_rand_list(used_list, point_pair_list, num_point=4)
+        if result:
+            p_camera_mat, p_robot_mat = result 
+            H = calibrate(p_robot_mat, p_camera_mat)
+            # The local error due to lose of precision in the float number need to be correct
+            # local_err = np.sum(p_robot_mat - np.dot(H, p_camera_mat))
+            # error = abs(error_test(H) - local_err  * len_list / num_point)
+            error = error_test(H)
+            # print(error)
+            print("Times:{}  Error:{}".format(i, error))
+            if error < min_error:
+                min_error = error
+                H_final = H
+
+    return H_final, min_error 
+
+
+def calibrate(data_path):
+    point_pair_list = get_point_pair_list(data_path)
+    num_point = 4
+    calibrate = get_calibrate(num_point)
+    used_list = []
+
+    pp_temp = []
+    data_list = []
+    num_iterate = 100 
+    H, error = ransac(point_pair_list)
+    return H, error 
