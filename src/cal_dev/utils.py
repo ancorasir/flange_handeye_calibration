@@ -52,6 +52,7 @@ def read_data(data_path, type):
 
     def str2array(line):
         '''convert string '[a,b,c,d]' to numpy array [a,b,c,d] '''
+        print(line)
         line = line.split("[")[1].split("]")[0].split(",")
         if line[-1] == " ":
             line = line[:-1]
@@ -100,20 +101,27 @@ def read_data(data_path, type):
         num_criteria = 0
         criteria_circle = 0
         criteria_plane = 0
+        min_criteria_circle = 9999999
+        min_criteria_plane = 9999999
         flag = 0
         while(True):
             line = f.readline()
             if line:
                 if "plane" in line:
                     flag += 1
-                    criteria_plane += int(f.readline())
+                    criteria_plane = int(f.readline())
                     f.readline()
                     f.readline()
                     f.readline()
-                    criteria_circle += int(f.readline())
+                    criteria_circle = int(f.readline())
+                    if criteria_plane < min_criteria_plane:
+                        min_criteria_plane = criteria_plane
+                    if criteria_circle < min_criteria_circle:
+                        min_criteria_circle = criteria_circle
             else:
                 if  criteria_circle > 0:
-                    return [int(criteria_circle/flag), int(criteria_plane/flag)]
+                    # return [int(criteria_circle/flag), int(criteria_plane/flag)]
+                    return [min_criteria_circle, min_criteria_plane]
                 else:
                     return None 
                 f.close() 
@@ -193,10 +201,9 @@ def get_point_pair_list(data_path):
 
 
 
-def get_rand_list(used_list, point_pair_list, num_point=4, exact_list=[]):
+def get_rand_list(point_pair_list, num_point=4, exact_list=[]):
     '''Select random points that is not in used list 
         - Input: 
-            * used_list: list of used indexes to avoid repitation
             * pp_list :  point_pair_list
             * num_point: number of points to use (minimum 4)
         - Output: 
@@ -220,11 +227,12 @@ def get_rand_list(used_list, point_pair_list, num_point=4, exact_list=[]):
                         break 
 
                 if len(exact_list) == num_point:
-                    if exact_list not in used_list:
-                        used_list.append(exact_list)
-                        break
-                    else:
-                        exact_list = []
+                    break 
+                    # if exact_list not in used_list:
+                    #     used_list.append(exact_list)
+                    #     break
+                    # else:
+                    #     exact_list = []
         # print(exact_list)
         result = point_valid_check(point_pair_list, num_list=exact_list)
 
@@ -234,6 +242,7 @@ def get_rand_list(used_list, point_pair_list, num_point=4, exact_list=[]):
             flag_fail_time += 1
             if flag_fail_time > 10:
                 return False
+            exact_list = []
             # print("Failing Times:{}".format(flag_fail_time))
             continue
 

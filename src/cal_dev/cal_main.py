@@ -19,10 +19,14 @@ from utils import H2trans_rot
 from timeout_decorator import timeout 
 import multiprocessing as mp
 import copy 
+import sys 
 
-# # mode: cal, test, debug, move
+# # mode: cal_corase, cal_fine, test, debug
 mode = "test"
-use_mp = False
+use_mp = True
+use_auto_judge = False
+
+killing_flag = False
 
 
 def copy_pose(original_pose):
@@ -61,10 +65,9 @@ def get_path_zigzag(path_, object_points):
     print("Generating Points:%d/%d"%(i, len(used_list)))
     point_start = np.array(object_points[line[0]])
     point_end = np.array(object_points[line[1]])
-    diff = point_start - point_end
+    diff = point_end - point_start 
 
     path_point = []
-
     for k in [0.25, 0.5, 0.75]:
       point = point_start + k * diff 
       path_point.append(point)
@@ -81,7 +84,7 @@ def get_fix_path(data_path=None, object_points=None, needTurbulance=False):
           -Input
             * data_path      [optional]: path of data file, if provided, will read target pose form file 
             * object_points  [optional]: a list of points, if provided, will add pose in the list the target path 
-            * needTrubulance [optional]: if provided, will add random turbulance to path  
+            * needTurbulance [optional]: if provided, will add random turbulance to path  
     '''
     path = []
     current_pose = group.get_current_pose().pose
@@ -99,8 +102,8 @@ def get_fix_path(data_path=None, object_points=None, needTurbulance=False):
         new_pose.position.y += (random.random()/10 - 0.05)*0.6
         new_pose.position.z += (random.random()/10 - 0.05)*0.6
 
-      if new_pose.position.z < 0.2:
-        new_pose.position.z = 0.2
+      if new_pose.position.z < 0.1:
+        new_pose.position.z = 0.1
         
 
       path.append(new_pose)
@@ -114,7 +117,9 @@ def get_image(im_name):
       - Input: im_name(path of the image)
   '''
   print("geting image with name:%s"%im_name)
-  status = os.system('sh /home/bionicdl/catkin_ws/src/fast_cal/image_cap.sh %s'%im_name)
+  status = os.system('sh ./image_cap.sh %s'%im_name)
+  # os.system("roslaunch phoxi_camera phoxi_camera_cal.launch num_of_iteration:=1 image_path:='%s'"%im_name)
+  rospy.sleep(2)
   return status 
 
 def plan_execute(target, mode, index=None):
@@ -142,13 +147,14 @@ def plan_execute(target, mode, index=None):
   return 
 
 
-def get_target():
+def get_target(im_path=None, cloud_path=None):
     '''
         Get coordinate of corner points from camera frame and convert it to robot base frame 
     '''
-    rospy.sleep(5)
-    img = cv2.imread("/home/bionicdl/calibration_images/imorigin.jpg")
-    
+    if not im_path:
+      im_path = "/home/bionicdl/calibration_images/imorigin.jpg"
+      cloud_path = "/home/bionicdl/calibration_images/im.ply"
+    img = cv2.imread(im_path)
     corners = []
     patternsize = tuple([8,11])
     count = 0
@@ -156,7 +162,7 @@ def get_target():
     ret, corners = cv2.findChessboardCorners(img, patternsize, count)
     img_new = cv2.drawChessboardCorners(img, patternsize, corners, ret)
     cv2.imwrite("/home/bionicdl/calibration_images/chess_plus.png", img_new) 
-    cloud = pcl.load("/home/bionicdl/calibration_images/im.ply")
+    cloud = pcl.load(cloud_path)
     target = []
     for coord in corners:
       # get the 3D coordinate of 2D point and add it to target list
@@ -175,7 +181,12 @@ class Worker(mp.Process):
         while True:
             task = self.inQ.get()  
             im_name, index, p_robot = task 
-            p_camera = circle_fitting(im_name, index)
+            if "flag" in index:
+              need_judge = False
+            else:
+              global use_auto_judge
+              need_judge = use_auto_judge
+            p_camera = circle_fitting(im_name, index, need_judge=need_judge)
             print("Worker Get Result")
             if p_camera:
               self.outQ.put([index, p_camera, p_robot])  
@@ -194,6 +205,7 @@ def finish_worker ():
 
 def move_shoot(target, mode):
   ''' Move to target and shoot an image (named after current timestamp) '''
+  global use_auto_judge
   current_time = time.time()
   index = str(int(current_time)) + str(current_time - int(current_time)).replace(".","_")
   plan_execute(target, mode, index)  
@@ -201,13 +213,30 @@ def move_shoot(target, mode):
   # print(im_name)
   result = get_image(im_name)
   time.sleep(5)
-  os.system('mv %s %s'%(im_name+".ply", im_name+index+".ply"))
-  os.system('mv %s %s'%(im_name+".PCD", im_name+index+".PCD"))
-  im_name+= index
-  current_pose = group.get_current_pose().pose
-  p_robot = [current_pose.position.x,current_pose.position.y, current_pose.position.z, current_pose.orientation.x, current_pose.orientation.y, current_pose.orientation.z, current_pose.orientation.w]
+  if use_auto_judge:
+    input_str = "auto_mode"
+  else:
+    input_str = raw_input("Press 'Enter' to continue (input 'd' to delete current shoot or 'q' to quit calibration)")
 
-  return im_name, index, p_robot
+  if input_str == "auto":
+    use_auto_judge = True
+
+  if input_str == "d":
+    os.system('rm %s '%(im_name+".ply"))
+    os.system('rm %s '%(im_name+".PCD"))
+    return False
+  elif input_str == "q":
+    print("Killing the program")
+    killing_flag = True
+    return False
+  else:
+    os.system('mv %s %s'%(im_name+".ply", im_name+index+".ply"))
+    os.system('mv %s %s'%(im_name+".PCD", im_name+index+".PCD"))
+    im_name+= index
+    current_pose = group.get_current_pose().pose
+    p_robot = [current_pose.position.x,current_pose.position.y, current_pose.position.z, current_pose.orientation.x, current_pose.orientation.y, current_pose.orientation.z, current_pose.orientation.w]
+
+    return im_name, index, p_robot
 
 if __name__ == "__main__":
   NUM_ATTEMPS = 1
@@ -241,60 +270,99 @@ if __name__ == "__main__":
   data_path = "/home/bionicdl/calibration_images/"  
   
   data_file = data_path + "data.txt"
+  # Start Camera Node
+  os.system("roslaunch phoxi_camera phoxi_camera.launch&")
+  rospy.sleep(2)
 
   if mode == "debug":
     '''Debug mode: print and write current pose '''
     print(group.get_current_pose().pose)
 
   
-  elif mode == "cal" or mode == "move":
+  elif "cal" in mode:
     ## Calibrate mode 
     path, object_points = get_fix_path(data_path=data_path+"target.txt")
 
     # Create Multiple Process
     worker = []
-    worker_num = len(path)
+    worker_num = 4
     create_worker(worker_num)
-    free_worker_pipe = list(range(worker_num))
     working_worker_pipe = []
 
     # Get path for calibration 
-    if mode == "cal":
+    if mode == "cal_fine":
       zig_zag_path = get_path_zigzag(path, object_points)
 
     os.system('touch %s'%data_file)
 
     it = 0
 
-    # coarse calibration
-    # for i in range(len(path)):
-    #   target = path[i]    
-    #   im_name,index, p_robot = move_shoot(target, mode)
-    #   worker[i%worker_num].inQ.put([im_name, ("flag"+str(i)), p_robot])
+    ## Coarse calibration
+    original_use_auto_judge = use_auto_judge
+    use_auto_judge = True
+    if not use_mp:
+      for i in range(len(path)):
+        target = path[i]    
+        im_name,index, p_robot = move_shoot(target, mode)
+        p_camera = circle_fitting(im_name,  ("flag"+str(i)+"_"+index), need_judge=False)
+        write_data(data_file, [p_robot, p_camera], index, type="point_pair")
     
-    # for i in range(len(path)):
-    #     result = worker[i%worker_num].outQ.get()
-    #     index, p_camera, p_robot = result
-    #     write_data(data_file, [p_robot, p_camera], index, type="point_pair")
+
+    if use_mp:
+      for i in range(len(path)):
+        print("Working Process")
+        print(working_worker_pipe)
+        target = path[i]
+        im_name,index, p_robot = move_shoot(target, mode)
+        worker[i%worker_num].inQ.put([im_name, ("flag"+str(i)+"_"+index), p_robot])
+        working_worker_pipe.append(i%worker_num)
+      
+        if len(working_worker_pipe) == worker_num:
+          last_idx = working_worker_pipe[0]
+          result = worker[last_idx].outQ.get()
+          working_worker_pipe.remove(last_idx)
+          index, p_camera, p_robot = result
+          write_data(data_file, [p_robot, p_camera], index, type="point_pair")
+
+
+      while len(working_worker_pipe) > 0 :
+        last_idx = working_worker_pipe[0]
+        result = worker[last_idx].outQ.get()
+        working_worker_pipe.remove(last_idx)
+        index, p_camera, p_robot = result
+        write_data(data_file, [p_robot, p_camera], index, type="point_pair")
+
+    use_auto_judge = original_use_auto_judge
 
     H_coarse, error_coarse = calibrate(data_file)
     print("Coarse Calibrate Finished")
     print(H_coarse)
+    write_data(data_file, H_coarse ,"H_coarse", type="mat")
+    trans, rot = H2trans_rot(H_coarse)
+    write_data(data_file, trans, "Trans_coarse", type="vec")
+    write_data(data_file, rot, "Rot_coarse", type="vec")
 
     H_final = copy.deepcopy(H_coarse)
     error_min = error_coarse
-    if not use_mp:
-      finish_worker()
 
-    timmer = time.time()
-    # fine calibration 
-    if mode == "cal":
+
+    ## Fine calibration 
+    if mode == "cal_fine":
       for idx, target in enumerate(zig_zag_path):
+        if killing_flag:
+          sys.exit(0)
+          break 
+
         print("##### Target: %d/%d #####"%(idx+1,len(zig_zag_path)))
 
-        im_name, index, p_robot = move_shoot(target, mode)
+        result = move_shoot(target, mode)
+        if result:
+          im_name, index, p_robot = result
+        else:
+          continue
+
         if not use_mp:
-          p_camera = circle_fitting(im_name, index)
+          p_camera = circle_fitting(im_name, index, need_judge=use_auto_judge)
           if p_camera:
             write_data(data_file, [p_robot, p_camera], index, type="point_pair")
             H, error = calibrate(data_file)
@@ -309,27 +377,19 @@ if __name__ == "__main__":
 
         # multiple process 
         if use_mp:
-          print("MP Stack: Free pipe & Working Pipe")
-          print(free_worker_pipe)
+          print("Working process:")
           print(working_worker_pipe)
-          if len(working_worker_pipe) > 0:
-            working_index = working_worker_pipe[0]
-            print("Working Index :%d"%working_index)
-            getResult = True
-            
-          if (time.time() - timmer > 60 or len(free_worker_pipe) == 0) and len(working_worker_pipe) > 0:
-              if(len(free_worker_pipe) == 0):
-                print("Process Congested, Please Wait for the processing Result")
-              result = worker[working_index].outQ.get()
+
+          if len(working_worker_pipe) == worker_num:
+              last_idx = working_worker_pipe[0]
+              result = worker[last_idx].outQ.get()
+              working_worker_pipe.remove(last_idx)
               getResult = True
-              timmer = time.time()
           else:
               getResult = False
 
             
           if getResult and result:
-            free_worker_pipe.append(working_index)
-            working_worker_pipe.remove(working_index)
             index, p_camera, p_robot = result
             write_data(data_file, [p_robot, p_camera], index, type="point_pair")
             H, error = calibrate(data_file)
@@ -341,18 +401,23 @@ if __name__ == "__main__":
               print(H)
               print(error_min)
         
-          free_index = free_worker_pipe[0]
-          worker[free_index].inQ.put([im_name, index, p_robot])
-          free_worker_pipe.remove(free_index)
-          working_worker_pipe.append(free_index)
+          worker[idx%worker_num].inQ.put([im_name, index, p_robot])
+          working_worker_pipe.append(idx%worker_num)
 
-      if use_mp:
-        finish_worker()
+      while len(working_worker_pipe) > 0 :
+        last_idx = working_worker_pipe[0]
+        result = worker[last_idx].outQ.get()
+        working_worker_pipe.remove(last_idx)
+        index, p_camera, p_robot = result
+        write_data(data_file, [p_robot, p_camera], index, type="point_pair")
 
-      write_data(data_file, H_final ,"H", type="mat")
-      trans, rot = H2trans_rot(H)
+      finish_worker()
+
+      write_data(data_file, H_final ,"H_final", type="mat")
+      trans, rot = H2trans_rot(H_final)
       write_data(data_path, trans, "Trans", type="vec")
       write_data(data_path, rot, "Rot", type="vec")
+
 
   elif mode == "test":
       #Testing mode: obtain coordinate of a chessboard (assumed to be visible), and move the robot arm above

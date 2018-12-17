@@ -31,13 +31,6 @@ void pcl_call_back(const sensor_msgs::PointCloud2::ConstPtr& pcl_map)
     return;
 }
 
-// void on_CornerHarris(const Mat inputImage, Mat& outputImage)
-// {
-//     Mat destImage;
-//     Mat normImage;
-//     Mat scaledImage;
-//     cornerHarris(inputImage, outputImage, 2, 3, 0.04, BORDER_DEFAULT);
-// }
 
 void rgb_call_back(const sensor_msgs::Image::ConstPtr& texture_map)
 {
@@ -56,34 +49,6 @@ void rgb_call_back(const sensor_msgs::Image::ConstPtr& texture_map)
     ros::param::get("~image_path", im_path);
     string im_path_origin = im_path + "origin" + ".jpg";
     cv::imwrite(im_path_origin, cv_ptr->image);
-    Mat image = cv_ptr->image;
-    // cornerHarris(image, image, 2, 3, 0.04, cv::BORDER_DEFAULT);
-    vector<Point2f> corners;
-    RNG rng(12345);
-    int maxCorners = 20;
-    double qualityLevel = 0.1;
-    double minDistance = 10;
-    int blockSize = 5;
-    bool useHarrisDetector = false;
-    double k = 0.04;
-    goodFeaturesToTrack(image, corners, maxCorners, qualityLevel, minDistance, Mat(), blockSize, useHarrisDetector, k);
-      /// Draw corners detected
-    cout<<GR(Number of corners detected: )<<corners.size()<<endl;
-    vector<Point2f>::iterator iter = corners.begin();
-    while(iter++ != corners.end())
-    {
-        cout << GR(Corner) << "X:" << iter-> x << " Y:" << iter -> y << endl;
-    }
-    int r = 10;
-    for( int i = 0; i < corners.size(); i++ )
-        { 
-            cout << GR(Printing) << corners[i] << endl;
-            cv::circle( image, corners[i], r, Scalar(255,255,255),5, 8, 0 ); 
-        }
-
-    string im_path_corner = im_path + "corner" + ".jpg";
-    cv::imwrite(im_path_corner, image);
-
 }
 
 // void passthrough(pcl::PointCloud)

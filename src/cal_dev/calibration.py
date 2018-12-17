@@ -11,20 +11,36 @@ from utils import *
 from numpy.linalg import *
 import os 
 
-def circle_fitting(pointCloud_path, index=999):
+
+def circle_feasibility_exam(data_path, index, circle_plane=None, circle_line=None):
+    ''' Write or exam circle feasibility'''
+    print("Feasiblity test")
+    print(index)
+    if "flag" in index and circle_plane and circle_line:
+        write_data(data_path, circle_plane, "criteria:plane", type="vec" )
+        write_data(data_path, circle_line, "criteria:line", type="vec" )
+    else:
+        criteria = read_data(data_path, "criteria")
+        if circle_plane and circle_plane < criteria[1] * 0.75:
+            print("Error: Too Less Point in the plane")
+            return False 
+
+        if circle_line and circle_line < int(criteria[0]*0.5) :
+            print("Error: Circle Size In-Correct")
+            return False 
+
+    return True
+
+
+
+
+def circle_fitting(pointCloud_path, index=999, need_judge=True):
     ''' Obtain the center of the circle at the flange of robot arm
         -Input: pointCloud_path (path of the point cloud), index(optional) 
     '''
 
     # data_path = os.path.dirname((pointCloud_path) + "/data.txt")
-    # Get criteria from data file
     data_path = "/home/bionicdl/calibration_images/data.txt"
-    if "flag" not in index:
-        criteria = read_data(data_path, "criteria")
-        # print("Get Criteria")
-        # print(criteria)
-    else:
-        criteria = None 
 
     print("Path:")
     print(pointCloud_path)
@@ -38,7 +54,7 @@ def circle_fitting(pointCloud_path, index=999):
     filter_axis = 'z'
     passthrough.set_filter_field_name(filter_axis)
     axis_min = 0.25
-    axis_max = 0.47
+    axis_max = 0.55
     passthrough.set_filter_limits(axis_min, axis_max)
     cloud_filtered = passthrough.filter()
     print("Path Through for %s"%str(index))
@@ -80,17 +96,9 @@ def circle_fitting(pointCloud_path, index=999):
             min_height = height 
             tool_index = cluster
 
-    # Check number of points in the plane to match with criteria 
-    if criteria and len(tool_index) < criteria[1] * 0.5:
-        print("Error: Too Less Point in the plane")
-        return False 
+
     tool0 = white_cloud.extract(tool_index)
     # pcl.save(tool0, "%s.pcd"%(cloud_path+"clustering"+str(index)))
-
-    if "flag" in index:
-        # Write Criteria For flag points 
-        write_data(data_path, len(tool_index), "criteria:plane", type="vec" )
-
 
 
     # Ransac circle segmentation
@@ -99,7 +107,7 @@ def circle_fitting(pointCloud_path, index=999):
     seg.set_model_type(pcl.SACMODEL_CIRCLE3D)
     max_distance = 0.0002
     seg.set_distance_threshold(max_distance)
-    seg.set_MaxIterations(10000)
+    seg.set_MaxIterations(50000)
     seg.set_optimize_coefficients("true")
     seg.set_method_type(6)
     inliers, coefficients = seg.segment()
@@ -115,19 +123,15 @@ def circle_fitting(pointCloud_path, index=999):
     center = coefficients[:3]
     points_list.append([center[0], center[1], center[2], 100])
 
-    # Check inliers in the circle to match with criteria 
-    # if criteria and (len(inliers) < int(criteria[0]*0.85) or int(len(inliers) < criteria[0]*1.3)):
-    #     print("Error: Circle Size In-Correct")
-    #     return False 
-
-    if "flag" in index:
-        # Write Criteria For flag points 
-        write_data(data_path, len(inliers), "criteria:circle", type="vec" )
         
-    
+    if need_judge or "flag" in index:
+        valid = circle_feasibility_exam(data_path, index, circle_plane=len(tool_index), circle_line=len(inliers))
+        if not valid:
+            return False
+
     tool0_c = pcl.PointCloud_PointXYZRGB()
     tool0_c.from_list(points_list)
-    pcl.save(tool0_c, "%s.pcd"%(cloud_path+"tool_c"))
+    # pcl.save(tool0_c, "%s.pcd"%(cloud_path+"tool_c"))
     
 
     return coefficients[:3]
@@ -172,7 +176,7 @@ def get_calibrate(num_point):
         return False
 
         
-def ransac(point_pair_list, num_point=4, max_iteration=10):
+def ransac(point_pair_list, num_point=4, max_iteration=10000):
     ''' A RANSAC framework for calibration '''
     p_camera_total, p_robot_total = pp2mat(point_pair_list)
     calibrate = get_calibrate(num_point)
@@ -188,11 +192,11 @@ def ransac(point_pair_list, num_point=4, max_iteration=10):
     if max_iteration > max_it_allowed:
         max_iteration = max_it_allowed
 
-    used_list = []
+    # used_list = []
     min_error = 10010
     H_final = []
     for i in range(max_iteration):
-        result = get_rand_list(used_list, point_pair_list, num_point=4)
+        result = get_rand_list(point_pair_list, num_point=num_point)
         if result:
             p_camera_mat, p_robot_mat = result 
             H = calibrate(p_robot_mat, p_camera_mat)
@@ -209,14 +213,18 @@ def ransac(point_pair_list, num_point=4, max_iteration=10):
     return H_final, min_error 
 
 
-def calibrate(data_path):
+def calibrate(data_path, num_point=4,max_iteration=10000):
     point_pair_list = get_point_pair_list(data_path)
-    num_point = 4
     calibrate = get_calibrate(num_point)
-    used_list = []
-
-    pp_temp = []
-    data_list = []
-    num_iterate = 100 
-    H, error = ransac(point_pair_list)
+    H, error = ransac(point_pair_list, num_point=num_point, max_iteration=max_iteration)
     return H, error 
+
+if __name__ == "__main__":
+    data_path = "/home/bionicdl/calibration_images/data.txt"
+    point_pair_list = read_data(data_path)
+    num_point = 4
+    # get a matrix of points
+    p_camera, p_robot = get_rand_list(point_pair_list, num_point=num_point)
+    # get transformation 
+    H, error = calibrate(point_pair_list, num_point=num_point, max_iteration=10086)
+    
