@@ -300,36 +300,13 @@ if __name__ == "__main__":
     ## Coarse calibration
     original_use_auto_judge = use_auto_judge
     use_auto_judge = True
+
+    # Get pointcloud, get p_robot, get p_camera and store point information
     if not use_mp:
       for i in range(len(path)):
         target = path[i]    
         im_name,index, p_robot = move_shoot(target, mode)
         p_camera = circle_fitting(im_name,  ("flag"+str(i)+"_"+index), need_judge=False)
-        write_data(data_file, [p_robot, p_camera], index, type="point_pair")
-    
-
-    if use_mp:
-      for i in range(len(path)):
-        print("Working Process")
-        print(working_worker_pipe)
-        target = path[i]
-        im_name,index, p_robot = move_shoot(target, mode)
-        worker[i%worker_num].inQ.put([im_name, ("flag"+str(i)+"_"+index), p_robot])
-        working_worker_pipe.append(i%worker_num)
-      
-        if len(working_worker_pipe) == worker_num:
-          last_idx = working_worker_pipe[0]
-          result = worker[last_idx].outQ.get()
-          working_worker_pipe.remove(last_idx)
-          index, p_camera, p_robot = result
-          write_data(data_file, [p_robot, p_camera], index, type="point_pair")
-
-
-      while len(working_worker_pipe) > 0 :
-        last_idx = working_worker_pipe[0]
-        result = worker[last_idx].outQ.get()
-        working_worker_pipe.remove(last_idx)
-        index, p_camera, p_robot = result
         write_data(data_file, [p_robot, p_camera], index, type="point_pair")
 
     use_auto_judge = original_use_auto_judge
@@ -373,45 +350,6 @@ if __name__ == "__main__":
               print("New H")
               print(H)
               print(error_min)
-
-
-        # multiple process 
-        if use_mp:
-          print("Working process:")
-          print(working_worker_pipe)
-
-          if len(working_worker_pipe) == worker_num:
-              last_idx = working_worker_pipe[0]
-              result = worker[last_idx].outQ.get()
-              working_worker_pipe.remove(last_idx)
-              getResult = True
-          else:
-              getResult = False
-
-            
-          if getResult and result:
-            index, p_camera, p_robot = result
-            write_data(data_file, [p_robot, p_camera], index, type="point_pair")
-            H, error = calibrate(data_file)
-            # iteration of transformation matrix 
-            if error < error_min:
-              H_final = H
-              error_min = error 
-              print("New H")
-              print(H)
-              print(error_min)
-        
-          worker[idx%worker_num].inQ.put([im_name, index, p_robot])
-          working_worker_pipe.append(idx%worker_num)
-
-      while len(working_worker_pipe) > 0 :
-        last_idx = working_worker_pipe[0]
-        result = worker[last_idx].outQ.get()
-        working_worker_pipe.remove(last_idx)
-        index, p_camera, p_robot = result
-        write_data(data_file, [p_robot, p_camera], index, type="point_pair")
-
-      finish_worker()
 
       write_data(data_file, H_final ,"H_final", type="mat")
       trans, rot = H2trans_rot(H_final)

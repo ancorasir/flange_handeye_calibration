@@ -2,3 +2,5 @@
 .DS_Store
 meshes/.DS_Store
 *.pyc
+.vscode/ipch/ad5e8f5e4b992d13/mmap_address.bin
+.vscode/ipch/5a352752e77f65ac/mmap_address.bin
