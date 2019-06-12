@@ -65,10 +65,11 @@ for index in index_list:
         print("Flange saved!")
 
 # circle fitting
+# 手动ransac 匹配模型
 p_robot_used = []
 maxD = 0.3/1000
 R_FLANGE = 31.0/1000
-detR = 0.001 #
+detR = 0.001 
 p_camera = []
 for i in range(len(index_list)):
     index = index_list[i]
