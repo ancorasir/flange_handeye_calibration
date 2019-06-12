@@ -45,6 +45,7 @@ class Franka_ROS_Controller:
         tool.pose = pose_from_vector(pose_vec)
         group.set_pose_target(tool, end_effector_link='panda_link8')
         plan = group.plan()
+        time.sleep(1)
         res = group.execute(plan)
         time.sleep(2)
         if not res:
@@ -53,7 +54,7 @@ class Franka_ROS_Controller:
             os.system(
                 "rostopic pub -1 /franka_control/error_recovery/goal franka_control/ErrorRecoveryActionGoal \"{}\"")
 
-    def get_current_pose(self):
+    def get_curr_pose(self):
         group  = self.group
         pose_ros = self.group.get_current_pose().pose
         return pose_to_vector(pose_ros)

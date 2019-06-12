@@ -34,9 +34,9 @@ _C.CIRCLE_FITTING.TYPE = "V1"
 # -----------------------------------------------------------------------------
 _C.CALIBRATION = CN()
 # Calibration algorithm, ["RANSAC", "DIRECT", "SVD"]
-_C.CALIBRATION.TYPE = "RANSAC"
-_C.CALIBRATION.MIN_POINT = 10
-# _C.CALIBRATION.TYPE = "SVD"
+# _C.CALIBRATION.TYPE = "RANSAC"
+_C.CALIBRATION.MIN_POINT = 5
+_C.CALIBRATION.TYPE = "SVD"
 # -----------------------------------------------------------------------------
 # Applicable for RANSAC only
 _C.CALIBRATION.PARAM = CN()
@@ -48,7 +48,7 @@ _C.CALIBRATION.PARAM.MAX_IT = 10000
 _C.PATH_GENERATOR = CN()
 # Path for usable point
 _C.PATH_GENERATOR.TYPE = "Interp"
-_C.PATH_GENERATOR.POINT_PATH = "../../data/usable_points.txt"
+_C.PATH_GENERATOR.POINT_PATH = "../../configs/valid_pos.txt"
 _C.PATH_GENERATOR.MAX_POINT = -1
 
 

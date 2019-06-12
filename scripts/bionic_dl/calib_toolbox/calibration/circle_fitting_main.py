@@ -3,8 +3,8 @@ import numpy as np
 from numpy.linalg import *
 import os
 import copy
-from sensor_stick.pcl_helper import *
-
+from sensor_stick import *
+from calib_toolbox.utils.pcl_helper import *
 
 # TODO: Merge code from original implementation
 def make_circle_extractor(cfg):
@@ -21,6 +21,9 @@ class CircleFitting_V1:
 
     def circle_fitting(self, point_cloud_path, index=999, need_judge=True, save_interm=False):
         # Load point cloud from given path
+        # FIXME: For debug
+        # print(point_cloud_path)
+        # cloud = pcl.load("/home/bionicdl-Mega/repos/01.ply")
         cloud = pcl.load(point_cloud_path)
 
         # Passthrough Filter
@@ -105,7 +108,9 @@ class CircleFitting_V1:
         return coefficients[:3]
 
     def __call__(self, *args, **kwargs):
-        p_camera = self.circle_fitting(self, args[0], args[1], save_interm=False)
+        point_cloud_dir = args[0]
+        index = args[1]
+        p_camera = self.circle_fitting(point_cloud_dir)
         return p_camera
 
 
@@ -122,8 +127,8 @@ class CircleFitting_V2:
         passthrough = cloud.make_passthrough_filter()
         filter_axis = 'z'
         passthrough.set_filter_field_name(filter_axis)
-        axis_min = 0.2
-        axis_max = 0.5
+        axis_min = 500
+        axis_max = 1000
         passthrough.set_filter_limits(axis_min, axis_max)
         cloud_filtered = passthrough.filter()
         # TODO: Statistical outlier filter
@@ -135,7 +140,7 @@ class CircleFitting_V2:
         white_cloud = XYZRGB_to_XYZ(cloud_filtered)
         tree = white_cloud.make_kdtree()
         ec = white_cloud.make_EuclideanClusterExtraction()
-        ec.set_ClusterTolerance(0.0005)  # Set tolerances for distance threshold
+        ec.set_ClusterTolerance(0.5)  # Set tolerances for distance threshold
         ec.set_MinClusterSize(2000)
         ec.set_MaxClusterSize(100000)  # as well as minimum and maximum cluster size (in points)
         ec.set_SearchMethod(tree)
@@ -156,13 +161,14 @@ class CircleFitting_V2:
         # plane segment
         seg = tool0.make_segmenter()
         seg.set_model_type(pcl.SACMODEL_PLANE)
-        max_distance = 0.001
+        max_distance = 0.1
         seg.set_distance_threshold(max_distance)
         seg.set_MaxIterations(10000)
         seg.set_optimize_coefficients("true")
         seg.set_method_type(0)
         inliers, coefficients = seg.segment()
         flange = tool0.extract(inliers, negative=False)
+
         if not output_path:
             output_path = copy.deepcopy(point_cloud_path)
             if "pcd" in output_path:
@@ -172,7 +178,11 @@ class CircleFitting_V2:
 
         if len(inliers) > 0:
             pcl.save(flange, output_path)
-            # print("Flange saved!")
+            print("Flange saved!")
+            return output_path
+        else:
+            return None
+
 
     def ransac_circle_fitting(self, point_cloud_path):
         p_robot_used = []
@@ -234,9 +244,26 @@ class CircleFitting_V2:
             points_list.append([data[0], data[1], data[2], rgb_to_float([255, 0, 0])])
         tool0_c = pcl.PointCloud_PointXYZRGB()
         tool0_c.from_list(points_list)
+
+        output_path = point_cloud_path
+        if "pcd" in output_path:
+            output_path.replace(".pcd", "_valid.pcd")
+        elif "ply" in output_path:
+            output_path.replace(".ply", "_valid.ply")
+
+        pcl.save(tool0_c, output_path)
+
         return np.array(max_P)
-        # pcl.save(tool0_c,
-        #          "/home/bionicdl/photoneo_data/calibration_images/data_ransac10000_valid/Tool0_c%s.pcd" % (i + 1))
-        # p_camera.append(max_P)
+
+
+    def __call__(self, *args, **kwargs):
+        point_cloud_dir = args[0]
+        output_dir = self.flange_extractor(point_cloud_dir)
+        if output_dir:
+            p_camera = self.ransac_circle_fitting(output_dir)
+            # p_camera = self.circle_fitting(self, args[0], args[1], save_interm=False)
+            return p_camera
+        else:
+            return np.array([])
 
 

@@ -5,6 +5,22 @@ from calib_toolbox.utils.transform import minvec_from_mat, vec_from_mat
 import copy
 import json
 from calib_toolbox.utils.transform import minvec_from_mat, vec_from_mat
+from open3d import *
+import tf
+
+
+def evaluate_calibration(s,t,H):
+    sTt = copy.deepcopy(s)
+    sTt.transform(H)
+    HI = np.matrix([[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]])
+    reg_p2p = registration_icp(sTt, t, 0.0003, HI, TransformationEstimationPointToPoint(),ICPConvergenceCriteria(max_iteration = 2000))
+    R = reg_p2p.transformation[:3,:3]
+    T = reg_p2p.transformation[:3,3]
+    al, be, ga = tf.transformations.euler_from_matrix(R, 'sxyz')
+    # print("xyz= [%2.2f, %2.2f, %2.2f]"%(T[0]*1000,T[1]*1000,T[2]*1000))
+    # print("rpy= [%2.5f, %2.5f, %2.5f]"%(al,be,ga))
+    return T*1000, np.array([al, be, ga])/3.14*180
+
 
 def make_calibrator(cfg):
     calib_cfg = cfg.clone()
@@ -18,7 +34,18 @@ def make_calibrator(cfg):
 
 class SVD:
     def __init__(self, cfg):
-        pass # simply nothing to be init at present
+        # initialize source & target piont cloud
+        target = read_point_cloud("/home/bionicdl/photoneo_data/20181217/aubo-i5-EndFlange_cropped_m.pcd")
+        source = read_point_cloud("/home/bionicdl/photoneo_data/20181217/tool0_5.pcd")
+        H_offset = np.matrix([[-1, 0, 0, 0], [0, 1, 0, 0], [0, 0, -1, -0.006], [0, 0, 0, 1]])
+        H_base_tool = tf.transformations.quaternion_matrix(
+            [-0.08580920098798522, -0.3893105864494028, 0.9148593368686363, 0.06408152657751885])
+        H_base_tool[:3, 3] = np.array([0.27704067625331485, -0.573055166920657, 0.26205388882758757])
+        s = copy.deepcopy(source)
+        t = copy.deepcopy(target)
+        t.transform(H_offset)
+        t.transform(H_base_tool)
+        pass
 
     def __call__(self, *args, **kwargs):
         pp_list = args[0]
