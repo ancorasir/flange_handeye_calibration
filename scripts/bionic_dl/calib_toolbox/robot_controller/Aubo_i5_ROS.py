@@ -29,7 +29,7 @@ class Aubo_i5_ROS_controller:
         self.MAX_PLAN_TIMES = 2
         # initialize moveit_commander and rospy node
         moveit_commander.roscpp_initialize(sys.argv)
-        rospy.init_node('move_group_aubo_i5', anonymous=True)
+        # rospy.init_node('move_group_aubo_i5', anonymous=True)
 
         # instantiate a RobotCommander object
         self.robot = moveit_commander.RobotCommander()
@@ -72,3 +72,6 @@ class Aubo_i5_ROS_controller:
         print(pose_vec)
         self.group.execute(plan_list[0])
         rospy.sleep(5)
+
+    def get_joint_pose(self):
+        pass
