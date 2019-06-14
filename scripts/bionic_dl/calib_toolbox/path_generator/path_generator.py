@@ -2,17 +2,13 @@ import numpy as np
 
 
 def make_path_generator(cfg, pose_vec_curr):
-    if cfg.PATH_GENERATOR.TYPE == "Interp":
-        return PathGenerator(cfg,pose_vec_curr)
-    elif cfg.PATH_GENERATOR.TYPE == "Grid":
-        return GridGenerator(cfg, pose_vec_curr)
+    return PathGenerator(cfg, pose_vec_curr)
 
 
 class PathGenerator:
     def __init__(self, cfg, pose_vec_curr, num_segment=5):
         self.curr_idx = 0
         self.init_pose = pose_vec_curr
-        self.MAX_POINT = cfg.PATH_GENERATOR.MAX_POINT
         data_path = cfg.PATH_GENERATOR.POINT_PATH
         self.num_segment = num_segment
 
@@ -36,6 +32,10 @@ class PathGenerator:
             self.origin_path_list.append(position)
 
     def _generate_path_seq(self):
+        """
+        Generate path by interpolation between adjacent points
+        """
+
         paring_idx = []
         num_points = len(self.origin_path_list) - 1
 
@@ -48,16 +48,22 @@ class PathGenerator:
             point_start = self.origin_path_list[line[0]]
             point_end = self.origin_path_list[line[1]]
             diff = point_end - point_start
+
+            ## uncomment to add pre-defined points into path
             self.interp_path_list.append(point_start)
 
             for k in seg_factor_list:
                 point = point_start + k * diff
                 self.interp_path_list.append(point)
 
+            ## uncomment to add pre-defined points into path
             if i == len(paring_idx) - 1:
                 self.interp_path_list.append(point_end)
 
-    def _generate_path_rand(self):
+    def _generate_path_full(self):
+        """
+        Generate path by interpolation pair-wisely for all pre-defined positions
+        """
         paring_idx = []
         num_points = len(self.origin_path_list)
         for i in range(num_points):
@@ -76,7 +82,11 @@ class PathGenerator:
                 self.interp_path_list.append(point)
 
     def get_waypoint_curr(self):
-        if self.curr_idx > 0 and self.curr_idx > self.MAX_POINT and self.curr_idx < len(self.interp_path_list):
+        """
+        Get interpolate position with current index
+        :return: pose_vec[x,y,z, q_w, q_x, q_y, q_z] or empty array if index reach the end
+        """
+        if self.curr_idx > 0 and self.curr_idx < len(self.interp_path_list):
             position = self.interp_path_list[self.curr_idx].tolist()
             position.extend(self.init_pose[3:].tolist())
             print("Processing waypoint: %d/%d"%(self.curr_idx, len(self.interp_path_list)))
@@ -84,49 +94,18 @@ class PathGenerator:
         else:
             return np.array([])
 
-    def get_waypoint_last(self):
+    def get_waypoint_prev(self):
+        """
+        Get interpolate position with previous index
+        :return: pose_vec[x,y,z, q_w, q_x, q_y, q_z] or empty array if index reach the end
+        """
         self.curr_idx -= 1
         return self.get_waypoint_curr()
 
     def get_waypoint_next(self):
+        """
+        Get interpolate position with next index
+        :return: pose_vec[x,y,z, q_w, q_x, q_y, q_z] or empty array if index reach the end
+        """
         self.curr_idx += 1
         return self.get_waypoint_curr()
-
-
-
-class GridGenerator:
-    def __init__(self, cfg, pose_vec_curr):
-        self.curr_idx = 0
-        self.init_pose = pose_vec_curr
-        self.MAX_POINT = 10086
-        data_path = cfg.PATH_GENERATOR.POINT_PATH
-        self.origin_path_list = []
-        self.interp_path_list = []
-
-        self._read_pionts(data_path)
-        self._generate_path()
-
-    # TODO: read grid boundary from file
-    def _read_pionts(self, data_path):
-        pass
-
-    # TODO: generate grid from initial boundary
-    def _generate_path(self):
-        pass
-
-    def get_waypoint_curr(self):
-        if self.curr_idx > 0 and self.curr_idx > self.MAX_POINT:
-            position = self.interp_path_list[self.curr_idx].tolist()
-            position.extend(self.init_pose[3:].tolist())
-            return np.array(position)
-        else:
-            return np.array([])
-
-    def get_waypoint_last(self):
-        self.curr_idx -= 1
-        return self.get_waypoint_curr()
-
-    def get_waypoint_next(self):
-        self.curr_idx += 1
-        return self.get_waypoint_curr()
-
