@@ -8,10 +8,20 @@ import numpy as np
 
 
 def point_to_vector(point_msg):
-    return [point_msg.x, point_msg.y, point_msg.z]
+    """
+    Transform ROS point message to numpy array
+    :param point_msg:
+    :return:
+    """
+    return np.array([point_msg.x, point_msg.y, point_msg.z])
 
 
 def point_from_vector(point_vec):
+    """
+    Transfrom 3D vector to ROS Point Message
+    :param point_vec:
+    :return:
+    """
     point_msg = Point()
     point_msg.x = point_vec[0]
     point_msg.y = point_vec[1]
@@ -21,7 +31,7 @@ def point_from_vector(point_vec):
 
 def quat_to_vector(quat_msg):
     """ geometry_msgs/Quaternion to vector [w, x, y, z] """
-    return [quat_msg.w, quat_msg.x, quat_msg.y, quat_msg.z]
+    return np.array([quat_msg.w, quat_msg.x, quat_msg.y, quat_msg.z])
 
 
 def quat_from_vector(quat_vec):
@@ -47,8 +57,8 @@ def quat_from_euler_vec(euler_vec):
 
 def pose_to_minVector(pose_msg):
     """ geometry_msgs/Pose to vector [x, y, z, roll, pitch, yaw] """
-    pos_vec = point_to_vector(pose_msg.position)
-    euler_vec = quat_to_euler_vec(pose_msg.orientation)
+    pos_vec = point_to_vector(pose_msg.position).tolist()
+    euler_vec = quat_to_euler_vec(pose_msg.orientation).tolist()
     pos_vec.extend(euler_vec)
     return np.array(pos_vec)
 
@@ -65,8 +75,8 @@ def pose_from_minVector(pose_minvec):
 
 def pose_to_vector(pose_msg):
     """ geometry_msgs/Pose to vector [x, y, z, quat_w, quat_x, quat_y, quat_z] """
-    pos_vec = point_to_vector(pose_msg.position)
-    quat_vec = quat_to_vector(pose_msg.orientation)
+    pos_vec = point_to_vector(pose_msg.position).tolist()
+    quat_vec = quat_to_vector(pose_msg.orientation).tolist()
     pos_vec.extend(quat_vec)
     return np.array(pos_vec)
 

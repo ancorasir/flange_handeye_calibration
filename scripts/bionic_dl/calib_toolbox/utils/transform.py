@@ -24,9 +24,9 @@ def pose2mat(pos, rot_euler, axes="sxyz"):
 def mat2pose(pose_mat, axes="sxyz"):
     """
     Convert transformation matrix to vector of position and euler angles
-    :param pose_mat:
-    :param axes:
-    :return:
+    :param pose_mat: 4x4 transformation matrix
+    :param axes: rotation axis, default to 'sxyz'
+    :return: pose vector : [x, y, z, q_w, q_x, q_y, q_z]
     """
     # if not isinstance(type(pose_mat), np.mat):
     #     pose_mat = np.mat(pose_mat)
@@ -37,10 +37,11 @@ def mat2pose(pose_mat, axes="sxyz"):
     rot_euler = np.array(rot_euler)
     return pos, rot_euler
 
+
 def mat_from_minvec(min_vec):
     """
     Obtain 4x4 matrix from pose in 6D vector
-    :param min_vec: numpy array [x,y,z,r,p,y]
+    :param min_vec: numpy array [x,y,z, r,p,y]
     :return: 4x4 matrix representing SE3 Transformation
     """
     if not isinstance(type(min_vec), np.ndarray):
@@ -67,7 +68,7 @@ def minvec_from_mat(pose_mat):
 def mat_from_vec(pose_vec):
     """
     Convert 7D pose vector (position + quaternion) to transformation matrix
-    :param pose_vec: [x,y,z, quat_w, quat_x, quat_y, quat_z]
+    :param pose_vec: [x, y, z, q_w, q_x, q_y, q_z]
     :return: 4x4 matrix representing SE3 Transformation in np.mat
     """
     if not isinstance(type(pose_vec), np.ndarray):
@@ -85,8 +86,8 @@ def mat_from_vec(pose_vec):
 def vec_from_mat(pose_mat):
     """
     Convert 4x4 transformation matrix in np.mat to 7D pose vector
-    :param pose_mat:
-    :return:
+    :param pose_mat: 4x4 transformation matrix
+    :return: [x, y, z, q_w, q_x, q_y, q_z]
     """
     # if not isinstance(type(pose_mat), np.mat):
     #     pose_mat = np.mat(pose_mat)
