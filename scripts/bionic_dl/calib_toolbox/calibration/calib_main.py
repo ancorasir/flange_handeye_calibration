@@ -4,22 +4,46 @@ import numpy as np
 from calib_toolbox.utils.transform import minvec_from_mat, vec_from_mat
 import copy
 import json
-from calib_toolbox.utils.transform import minvec_from_mat, vec_from_mat
+from calib_toolbox.utils.transform import minvec_from_mat, vec_from_mat, mat_from_vec, mat_from_minvec
 from open3d import *
 import tf
+from numpy.linalg import det
 
 
 def evaluate_calibration(s,t,H):
+    """
+    Evaluate by ICP
+    :param s: source point cloud
+    :param t: target point cloud
+    :param H: transformation matrix to be evaluated
+    :return:
+    """
     sTt = copy.deepcopy(s)
     sTt.transform(H)
     HI = np.matrix([[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]])
-    reg_p2p = registration_icp(sTt, t, 0.0003, HI, TransformationEstimationPointToPoint(),ICPConvergenceCriteria(max_iteration = 2000))
+    reg_p2p = registration_icp(sTt, t, 0.0003, HI, TransformationEstimationPointToPoint(),ICPConvergenceCriteria(max_iteration = 200000))
     R = reg_p2p.transformation[:3,:3]
     T = reg_p2p.transformation[:3,3]
     al, be, ga = tf.transformations.euler_from_matrix(R, 'sxyz')
     # print("xyz= [%2.2f, %2.2f, %2.2f]"%(T[0]*1000,T[1]*1000,T[2]*1000))
     # print("rpy= [%2.5f, %2.5f, %2.5f]"%(al,be,ga))
-    return T*1000, np.array([al, be, ga])/3.14*180
+    return T, np.array([al, be, ga])/3.14*180
+
+
+def draw_registration_result(source, target, transformation):
+    """
+    Visualize transformation result
+    :param source: source point cloud
+    :param target: target point cloud
+    :param transformation: transformation matrix
+    :return:
+    """
+    source_temp = copy.deepcopy(source)
+    target_temp = copy.deepcopy(target)
+    source_temp.paint_uniform_color([1, 0.706, 0])
+    target_temp.paint_uniform_color([0, 0.651, 0.929])
+    source_temp.transform(transformation)
+    draw_geometries([source_temp, target_temp])
 
 
 def make_calibrator(cfg):
@@ -34,22 +58,33 @@ def make_calibrator(cfg):
 
 class SVD:
     def __init__(self, cfg):
-        # initialize source & target piont cloud
-        target = read_point_cloud("/home/bionicdl/photoneo_data/20181217/aubo-i5-EndFlange_cropped_m.pcd")
-        source = read_point_cloud("/home/bionicdl/photoneo_data/20181217/tool0_5.pcd")
-        H_offset = np.matrix([[-1, 0, 0, 0], [0, 1, 0, 0], [0, 0, -1, -0.006], [0, 0, 0, 1]])
-        H_base_tool = tf.transformations.quaternion_matrix(
-            [-0.08580920098798522, -0.3893105864494028, 0.9148593368686363, 0.06408152657751885])
-        H_base_tool[:3, 3] = np.array([0.27704067625331485, -0.573055166920657, 0.26205388882758757])
+        # initialize CAD generated point cloud with known offset
+        H_offset = np.matrix([[1, 0, 0, -315], [0, 1, 0, -315], [0, 0, 1, -30], [0, 0, 0, 1]])
+
+        target = read_point_cloud(cfg.CALIBRATION.TARGET_DIR)
+        source = read_point_cloud(cfg.CALIBRATION.SOURCE_DIR)
+
+        pose_vec_str = cfg.CALIBRATION.SOURCE_POSE
+        pose_vec = np.array(pose_vec_str.split(","), dtype=np.float)
+        H_base_tool = mat_from_vec(pose_vec)
+
         s = copy.deepcopy(source)
         t = copy.deepcopy(target)
-        t.transform(H_offset)
-        t.transform(H_base_tool)
-        pass
 
-    def __call__(self, *args, **kwargs):
-        pp_list = args[0]
-        p_robot_mat, p_camera_mat = pp_list.get_mat_full()
+        t.transform(H_offset)
+
+        t.transform(H_base_tool)
+        self.s = s
+        self.t = t
+
+    def _cal_SVD(self, p_robot_mat, p_camera_mat):
+        """
+        Solve for SVD solution
+        :param p_robot_mat: 4xi matrix of robot position
+        :param p_camera_mat: 4xi matrix of camera position
+        :return:
+        """
+        # p_robot_mat, p_camera_mat = pp_list.get_mat_full()
         num_point = p_robot_mat.shape[1]
         p_robot_centroid = np.mean(p_robot_mat[:3,:],axis=1).reshape(3,1)
         p_camera_centroid = np.mean(p_camera_mat[:3,:],axis=1).reshape(3,1)
@@ -66,17 +101,89 @@ class SVD:
         t = p_robot_centroid - np.matmul(R, p_camera_centroid)
         return np.array(np.concatenate([np.concatenate([R,t],axis=1),np.array([0, 0, 0, 1]).reshape(1,4)]))
 
+    def __call__(self, *args, **kwargs):
+        """
+        SVD Calibration
+        :param args: PointPairList object
+        :param kwargs:
+        :return:
+        """
+        pp_list = args[0]
+        error = []
+        xyz = []
+        rpy = []
+
+        p_robot_mat, p_camera_mat = pp_list.get_mat_full()
+        s = self.s
+        t = self.t
+
+        # iterate for 100 times
+        for r in range(100):
+            error_r = []
+            xyz_r = []
+            rpy_r = []
+            init_success = False
+            while not init_success:
+                idx = np.random.choice(p_robot_mat.shape[1], p_robot_mat.shape[1], 0) # randomly arrange
+                p_robot_mat_i = p_robot_mat[:, idx[:5]]
+                p_camera_mat_i = p_camera_mat[:, idx[:5]]
+                for j in range(5):
+                    p_robot_mat_j = p_robot_mat_i
+                    p_camera_mat_j = p_camera_mat_i
+                    p_robot_mat_j = np.delete(p_robot_mat_j, j, 1)
+                    p_camera_mat_j = np.delete(p_camera_mat_j, j, 1)
+                    if abs(det(p_robot_mat_j)) > math.pow(10, -4) and abs(det(p_camera_mat_j)) > math.pow(10, -4):
+                        init_success = True
+
+            error_i = 1000
+            for i in range(5, len(idx)):
+                for j in range(5):
+                    p_robot_mat_j = p_robot_mat_i
+                    p_camera_mat_j = p_camera_mat_i
+                    p_robot_mat_j = np.delete(p_robot_mat_j, j, 1)
+                    p_camera_mat_j = np.delete(p_camera_mat_j, j, 1)
+                    H_j = self._cal_SVD(p_robot_mat_j, p_camera_mat_j)
+
+                    draw_registration_result(self.s, self.t, H_j)
+                    xyz_j, rpy_j = evaluate_calibration(self.s, self.t, H_j)
+
+                    error_curr = (np.sum(xyz_j ** 2)) ** (0.5)
+
+                    if 0 < error_curr < error_i:
+                        error_i = (np.sum(xyz_j ** 2)) ** (0.5)
+                        H_i = H_j
+                        xyz_i = xyz_j
+                        rpy_i = rpy_j
+                        p_robot_mat_s = p_robot_mat_j
+                        p_camera_mat_s = p_camera_mat_j
+                # print("Iteration:{}  Error:{} mm xyz:{} mm rpy:{}".format(i, error_i, xyz_i, rpy_i))
+                error_r.append(error_i)
+                xyz_r.append(xyz_i)
+                rpy_r.append(rpy_i)
+                # if error_i < 0.5:
+                #     print("Terminated: calibration error is within 0.5 mm!")
+                #     break
+                p_robot_mat_i = np.concatenate((p_robot_mat_s, p_robot_mat[:, idx[i]].reshape([3, 1])), axis=1)
+                p_camera_mat_i = np.concatenate((p_camera_mat_s, p_camera_mat[:, idx[i]].reshape([3, 1])), axis=1)
+            print("Random:{}  Error:{} mm xyz:{} mm rpy:{}".format(r, error_i, xyz_i, rpy_i))
+            error.append(error_r)
+            xyz.append(xyz_r)
+            rpy.append(rpy_r)
+            # TODO: Keep the results
+        return np.array(H_i)
+
+
 
 class RANSAC:
     def __init__(self, cfg):
         cfg_RANSAC = cfg.clone()
-        self.max_it = cfg_RANSAC.CALIBRATION.PARAM.MAX_IT
+        self.max_it = 10000
         self.num_point = 4
 
-    @staticmethod
     def _get_error(self, H, p_robot_mat, p_camera_mat):
         error_matrix = p_robot_mat - np.matmul(H, p_camera_mat)
         error = np.sum((np.asarray(error_matrix)) ** 2) / p_camera_mat.shape[0] / (p_camera_mat.shape[1] - 4)
+        error = np.sqrt(error)
         return error
 
     def __call__(self, *args, **kwargs):
