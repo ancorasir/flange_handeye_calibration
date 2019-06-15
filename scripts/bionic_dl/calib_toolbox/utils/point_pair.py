@@ -5,7 +5,7 @@ from .io_old import read_data as read_old
 import math
 from numpy.linalg import det
 import random
-from calib_toolbox.utils.transform import minvec_from_mat, vec_from_mat
+from transform import minvec_from_mat, vec_from_mat
 
 
 class PointPair:
@@ -107,15 +107,9 @@ class PointPairList:
             data_dict.update({i:data_dict.pop(str(i))})
             p_robot = np.array(data_dict[i]["p_robot"])
             p_camera = np.array(data_dict[i]["p_cam"])
-            # i = int(i)
-
-            # FIXME: Temperally used to convert from m to mm
-            # p_camera /= 10
-            p_robot *= 1000
+        
             curr_pp_dict.update({i: PointPair(i, p_robot, p_camera)})
 
-            # i = str(i)
-            print(list(data_dict[i].keys()))
             if len(list(data_dict[i].keys())) > 2:
                 for key in data_dict[i].keys():
                     key = str(key)
@@ -285,6 +279,8 @@ class PointPairList:
 
             if overwrite:
                 self.write_data(self.source_dir)
+            else:
+                self.write_data(os.path.joint(os.path.dirname(self.source_dir), "calib_data_updated.json"))
 
     def remove_empty(self):
         """
