@@ -8,15 +8,6 @@
 - `open3d`
 
 
-
-## Installation
-
-- cd to `/bionic_dl/`
-- `sudo python setup.py build`
-- `sudo python setup.py install
-
-
-
 # Overview
 
 ![module_design](./img/img_doc.png)
@@ -79,6 +70,7 @@ class PiontPairList:
 # Definition: /calib_toolbox/robot_controller
 class RobotController:
   __init__() # set up necessary compoment, e.g. moveit group
+  # Note that if there's need to convert uint metrics, convert it in the implementation of move() and get_curr_pose
   move(pose_vec) # move robot end-actuator to required pose
   get_curr_pose(): return pose_vec # return current pose of robot end-actuator
   
