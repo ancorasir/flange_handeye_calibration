@@ -12,11 +12,13 @@ import moveit_msgs.msg
 import moveit_msgs.srv
 import geometry_msgs.msg
 import cv2,os
-from calib_toolbox.utils.transform_ros import pose_from_vector, pose_to_vector
-
+import sys 
+sys.path.append("..")
+from utils.transform_ros import pose_from_vector, pose_to_vector
 
 class Franka_ROS_Controller:
     def __init__(self, cfg):
+        self.use_mm = cfg.USE_MM_ROBOT
         moveit_commander.roscpp_initialize(sys.argv)
         robot = moveit_commander.RobotCommander()
         scene = moveit_commander.PlanningSceneInterface()
@@ -34,6 +36,7 @@ class Franka_ROS_Controller:
         tool.pose.orientation.w = 1
         self.tool = tool
 
+
     def move(self, pose_vec):
         """
         Move robot to required pose
@@ -41,6 +44,9 @@ class Franka_ROS_Controller:
         """
         group = self.group
         tool  = self.tool
+
+        if self.use_mm:
+            pose_vec[:3] /= 1000
 
         group.set_start_state_to_current_state()
         group.clear_pose_targets()
@@ -65,8 +71,10 @@ class Franka_ROS_Controller:
         """
         Get current pose of robot
         :return: pose_vec: [x, y, z, q_w, q_x, q_y, q_z]
-        """
-
+        """ 
         group  = self.group
         pose_ros = self.group.get_current_pose().pose
-        return pose_to_vector(pose_ros)
+        pose_vec = pose_to_vector(pose_ros)
+        if self.use_mm:
+            pose_vec *= 1000
+        return pose_vec

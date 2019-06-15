@@ -1,10 +1,12 @@
+import sys 
+sys.path.append("..")
 import os
 import math
 import numpy as np
-from calib_toolbox.utils.transform import minvec_from_mat, vec_from_mat
+from utils.transform import minvec_from_mat, vec_from_mat
 import copy
 import json
-from calib_toolbox.utils.transform import minvec_from_mat, vec_from_mat, mat_from_vec, mat_from_minvec
+from utils.transform import minvec_from_mat, vec_from_mat, mat_from_vec, mat_from_minvec
 from open3d import *
 import tf
 from numpy.linalg import det
@@ -56,7 +58,7 @@ def make_calibrator(cfg):
         return SVD(cfg)
 
 
-class SVD:
+class IterativeCalib:
     def __init__(self, cfg):
         # initialize CAD generated point cloud with known offset
         H_offset = np.matrix([[1, 0, 0, -315], [0, 1, 0, -315], [0, 0, 1, -30], [0, 0, 0, 1]])

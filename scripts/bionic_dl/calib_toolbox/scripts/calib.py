@@ -1,11 +1,13 @@
 # Scripts for apply calibration lively
-from calib_toolbox.robot_controller.Franka_ROS import Franka_ROS_Controller
-from calib_toolbox.config import cfg
-from calib_toolbox.utils.point_pair import PointPair, PointPairList
-from calib_toolbox.path_generator.path_generator import PathGenerator
-from calib_toolbox.calibration.calib_main import RANSAC
-from calib_toolbox.calibration.circle_fitting_main import CircleFitting_V2
-from calib_toolbox.cam_controller.photoneo import Photoneo_Controller
+import sys 
+sys.path.append("..")
+from robot_controller.Franka_ROS import Franka_ROS_Controller
+from config import cfg
+from utils.point_pair import PointPair, PointPairList
+from path_generator.path_generator import PathGenerator
+from calibration.calib_main import RANSAC, IterativeCalib
+from calibration.circle_fitting_main import CircleFitting_V2
+from cam_controller.photoneo import Photoneo_Controller
 import rospy
 import argparse
 import os
@@ -15,7 +17,7 @@ import numpy as np
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Calibration Configs")
-    parser.add_argument("--config-file", default="/home/bionicdl-Mega/repos/flange_handeye_calibration/scripts/bionic_dl/configs/online_calib.yaml", metavar="FILE", help="path to config file")
+    parser.add_argument("--config-file", default="../config_files/online_calib.yaml", metavar="FILE", help="path to config file")
     args = parser.parse_args()
 
     cfg.merge_from_file(args.config_file)
@@ -79,15 +81,16 @@ if __name__ == "__main__":
         list_idx = pp_list.add_point(p_robot, p_camera)
 
         # FIXME: Convert unit from m to mm for temporally use
-        pp_list.pp_dict[list_idx].add_field("robot_pose", p_robot*1000)
-
+        pp_list.pp_dict[list_idx].add_field("robot_pose", p_robot)
+        
         pp_list.pp_dict[list_idx].add_field("point_cloud_dir", point_cloud_dir)
         pp_list.write_data(data_path)
 
         if "Calib" in cfg.MODE:
             pp_list.remove_empty()
             if pp_list.get_len() > 4:
-                calib = RANSAC(cfg)
+                # calib = RANSAC(cfg)
+                calib = IterativeCalib(cfg)
                 H = calib(pp_list)
                 pp_list.write_result(result_path, H)
 

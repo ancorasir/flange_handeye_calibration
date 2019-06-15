@@ -1,9 +1,11 @@
 # Script for calibration using existing data
-from calib_toolbox.config import cfg
-import calib_toolbox.utils.io_old as io_old
-from calib_toolbox.utils.point_pair import PointPair, PointPairList
-from calib_toolbox.calibration.calib_main import SVD, RANSAC
-from calib_toolbox.calibration.circle_fitting_main import CircleFitting_V2, CircleFitting_V1
+import sys 
+sys.path.append("..")
+from config import cfg
+import utils.io_old as io_old
+from utils.point_pair import PointPair, PointPairList
+from calibration.calib_main import SVD, RANSAC
+from calibration.circle_fitting_main import CircleFitting_V2, CircleFitting_V1
 import os
 import argparse
 

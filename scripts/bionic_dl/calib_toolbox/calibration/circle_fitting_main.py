@@ -1,10 +1,12 @@
+import sys 
+sys.path.append("..")
 import pcl
 import numpy as np
 from numpy.linalg import *
 import os
 import copy
 from sensor_stick import *
-from calib_toolbox.utils.pcl_helper import *
+from utils.pcl_helper import *
 
 
 def make_circle_extractor(cfg):
@@ -116,7 +118,6 @@ class CircleFitting_V1:
         # index = args[1]
         p_camera = self.circle_fitting(point_cloud_dir)
         return p_camera
-
 
 class CircleFitting_V2:
     def __init__(self, cfg):

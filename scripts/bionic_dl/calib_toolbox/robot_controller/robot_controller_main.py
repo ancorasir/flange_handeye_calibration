@@ -1,6 +1,6 @@
-from calib_toolbox.robot_controller.Aubo_i5_ROS import Aubo_i5_ROS_controller
-from calib_toolbox.robot_controller.UR5_Socket import UR5_Controller_Socket
-from calib_toolbox.robot_controller.Franka_ROS import Franka_ROS_Controller
+from Aubo_i5_ROS import Aubo_i5_ROS_controller
+from UR5_Socket import UR5_Controller_Socket
+from Franka_ROS import Franka_ROS_Controller
 
 def make_robot_controller(cfg):
     if cfg.ROBOT_CONTROLLER.ROBOT_TYPE == "Aubo_i5_ROS":

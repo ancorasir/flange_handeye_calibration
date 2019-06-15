@@ -12,7 +12,6 @@ import os
 import random
 import cv2
 import pcl
-from calibration import circle_fitting, calibrate
 from utils import write_data, read_data
 import time
 from utils import H2trans_rot
@@ -20,7 +19,8 @@ from timeout_decorator import timeout
 import multiprocessing as mp
 import copy
 import sys
-from calib_toolbox.utils.transform_ros import pose_from_vector, pose_to_vector
+sys.path.append("..")
+from utils.transform_ros import pose_from_vector, pose_to_vector
 
 class Aubo_i5_ROS_controller:
     def __init__(self, cfg):

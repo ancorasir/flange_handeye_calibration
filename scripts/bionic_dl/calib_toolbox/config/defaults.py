@@ -12,6 +12,8 @@ _C.MODE = "Collect"
 # -----------------------------------------------------------------------------
 _C.DATA = CN()
 _C.DATA_PATH = "/home/bionicdl-Mega/repos/flange_handeye_calibration/scripts/bionic_dl/data/"
+# If set to true, update robot positions from meter to mm 
+_C.USE_MM_ROBOT = True 
 
 # -----------------------------------------------------------------------------
 # Robot Controller
@@ -47,8 +49,8 @@ _C.CALIBRATION = CN()
 # _C.CALIBRATION.TYPE = "RANSAC"
 _C.CALIBRATION.MIN_POINT = 5
 _C.CALIBRATION.TYPE = "SVD"
-_C.CALIBRATION.TARGET_DIR = "/home/bionicdl-Mega/repos/new/flange_handeye_calibration/flange_ground_truth/flange_franka.pcd"
-_C.CALIBRATION.SOURCE_DIR = "/home/bionicdl-Mega/repos/new/flange_handeye_calibration/flange_ground_truth/flange_franka_ref.pcd"
+_C.CALIBRATION.TARGET_DIR = "/home/bionicdl-Mega/repos/flange_handeye_calibration/flange_ground_truth/flange_franka.pcd"
+_C.CALIBRATION.SOURCE_DIR = "/home/bionicdl-Mega/repos/flange_handeye_calibration/flange_ground_truth/flange_franka_ref.pcd"
 _C.CALIBRATION.SOURCE_POSE = "494.6041199503259, 114.02491027266817, 455.9592421126155, 0.9144343155379376, -0.01431055883584167, -0.0009572324991887879, 0.40448012828618896"
 # _C.CALIBRATION.SOURCE_DIR = "/home/bionicdl-Mega/repos/new/flange_handeye_calibration/flange_ground_truth/franka_ref2.pcd"
 # _C.CALIBRATION.SOURCE_POSE = "294.8924164926116, 23.64333038073283, 547.8668618866172, 0.891711695746443, -0.024948206094703076, -0.11366582231497009, -0.4373876078710059"
@@ -58,7 +60,7 @@ _C.CALIBRATION.SOURCE_POSE = "494.6041199503259, 114.02491027266817, 455.9592421
 # -----------------------------------------------------------------------------
 _C.PATH_GENERATOR = CN()
 # Path for piont file
-_C.PATH_GENERATOR.POINT_PATH = "../../configs/valid_pos.txt"
+_C.PATH_GENERATOR.POINT_PATH = "/home/bionicdl-Mega/repos/flange_handeye_calibration/scripts/bionic_dl/calib_toolbox/config_files/valid_pos.txt"
 
 
 
