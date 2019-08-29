@@ -1,7 +1,0 @@
-<launch>
-    <!-- Run PhoXi Control -->
-    <node name="PhoXiControl" pkg="phoxi_camera" type="run_phoxi_control.sh" />
-
-    <!-- Run Google unittest -->
-  <test test-name="PhoXiInterfaceClassUnittest" pkg="phoxi_camera" type="phoxi_camera_unittest" time-limit="200"/>
-</launch>

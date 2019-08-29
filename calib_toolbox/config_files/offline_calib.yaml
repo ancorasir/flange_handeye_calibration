@@ -1,0 +1,6 @@
+MODE: "Calib"
+DATA_PATH: "../data/2019-06-14-sample/calib_data.json"
+CALIBRATION:
+    TYPE: "SVD"
+    TARGET_DIR: "../data/flange_ground_truth/flange_franka.pcd"
+    SOURCE_DIR: "../data/flange_ground_truth/flange_franka_verification.pcd"
