@@ -1,0 +1,2979 @@
+[ INFO] [1559725066.684013183]: Loading robot model 'panda'...
+[ INFO] [1559725066.752551580]: Loading robot model 'panda'...
+[ INFO] [1559725067.970307414]: Ready to take commands for planning group panda_arm.
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.37
+    y: -0.1
+    z: 0.3
+  orientation:
+    x: -0.002795031067877613
+    y: 0.0925135164793731
+    z: 0.058870742660035946
+    w: 0.9939656295509448)
+Please enter:
+[ INFO] [1559725073.741730999]: ABORTED: Solution found but controller failed during execution
+publishing and latching message for 3.0 seconds
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.37
+    y: -0.1
+    z: 0.35
+  orientation:
+    x: 0.07862250058054358
+    y: 0.1008107766678279
+    z: 0.08304200854452039
+    w: 0.9883115473002343)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 8
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 8
+    Frame Timestamp: 7.93667e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1687378 measured points.
+save to data/2019-06-05/16:57:46/1.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.37
+    y: -0.1
+    z: 0.4
+  orientation:
+    x: 0.0880793413560606
+    y: 0.06593463173584575
+    z: 0.03338706084132707
+    w: 0.9933679872698327)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 9
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 9
+    Frame Timestamp: 7.94691e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1674140 measured points.
+save to data/2019-06-05/16:57:46/2.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.37
+    y: -0.1
+    z: 0.45
+  orientation:
+    x: 0.0283249711258397
+    y: 0.037696224768637786
+    z: 0.09370303444082002
+    w: 0.9944829973335366)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 10
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 10
+    Frame Timestamp: 7.95687e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1651480 measured points.
+save to data/2019-06-05/16:57:46/3.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.43333333333333335
+    y: -0.1
+    z: 0.3
+  orientation:
+    x: 0.006616080046834514
+    y: 0.08506142289921018
+    z: 0.06156425128907281
+    w: 0.9944499106452731)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 11
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 11
+    Frame Timestamp: 7.97878e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1637200 measured points.
+save to data/2019-06-05/16:57:46/4.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.43333333333333335
+    y: -0.1
+    z: 0.35
+  orientation:
+    x: 0.011334097788490566
+    y: 0.07298839451652059
+    z: 0.044900066311177114
+    w: 0.9962571036326284)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 12
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 12
+    Frame Timestamp: 7.98807e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1601585 measured points.
+save to data/2019-06-05/16:57:46/5.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.43333333333333335
+    y: -0.1
+    z: 0.4
+  orientation:
+    x: 0.0010014889218590414
+    y: 0.05235959983929665
+    z: 0.07894423931284125
+    w: 0.9955025245592926)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 13
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 13
+    Frame Timestamp: 7.99807e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1568716 measured points.
+save to data/2019-06-05/16:57:46/6.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.43333333333333335
+    y: -0.1
+    z: 0.45
+  orientation:
+    x: 0.031377591646187766
+    y: 0.05328424906523787
+    z: 0.0029570540363343927
+    w: 0.9980819061457156)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 14
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 14
+    Frame Timestamp: 8.00624e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1547194 measured points.
+save to data/2019-06-05/16:57:46/7.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.4966666666666667
+    y: -0.1
+    z: 0.3
+  orientation:
+    x: 0.07062732361908344
+    y: 0.07681785614262909
+    z: 0.012707796804033722
+    w: 0.9944593053697285)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 15
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 15
+    Frame Timestamp: 8.01642e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1620014 measured points.
+save to data/2019-06-05/16:57:46/8.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.4966666666666667
+    y: -0.1
+    z: 0.35
+  orientation:
+    x: 0.0031535100248161834
+    y: 0.013805966867394832
+    z: 0.0771562403334082
+    w: 0.9969184345928171)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 16
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 16
+    Frame Timestamp: 8.02437e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1597865 measured points.
+save to data/2019-06-05/16:57:46/9.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.4966666666666667
+    y: -0.1
+    z: 0.4
+  orientation:
+    x: 0.042824191989824345
+    y: 0.015463892410540008
+    z: 0.07446042195009374
+    w: 0.996184020236697)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 17
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 17
+    Frame Timestamp: 8.03333e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1550383 measured points.
+save to data/2019-06-05/16:57:46/10.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.4966666666666667
+    y: -0.1
+    z: 0.45
+  orientation:
+    x: 0.0843735690115064
+    y: 0.009759578055345755
+    z: 0.026216464340124337
+    w: 0.996041439140935)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 18
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 18
+    Frame Timestamp: 8.04282e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1496124 measured points.
+save to data/2019-06-05/16:57:46/11.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.56
+    y: -0.1
+    z: 0.3
+  orientation:
+    x: 0.031222096193845042
+    y: 0.049137591629139554
+    z: 0.06473120843691897
+    w: 0.9962030658718363)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 19
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 19
+    Frame Timestamp: 8.05249e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1632381 measured points.
+save to data/2019-06-05/16:57:46/12.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.56
+    y: -0.1
+    z: 0.35
+  orientation:
+    x: 0.09520664272662999
+    y: 0.04376331107412128
+    z: 0.008803627168415401
+    w: 0.9944561146341416)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 20
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 20
+    Frame Timestamp: 8.06907e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1576791 measured points.
+save to data/2019-06-05/16:57:46/13.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.56
+    y: -0.1
+    z: 0.4
+  orientation:
+    x: 0.03009621031771435
+    y: 0.007731420495690035
+    z: 0.04080112907841985
+    w: 0.998683989622121)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 21
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 21
+    Frame Timestamp: 8.0787e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1550610 measured points.
+save to data/2019-06-05/16:57:46/14.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.56
+    y: -0.1
+    z: 0.45
+  orientation:
+    x: 0.01578088494493245
+    y: 0.09298445808172154
+    z: 0.056951322942216984
+    w: 0.9939121696813732)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 22
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 22
+    Frame Timestamp: 8.08929e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1509376 measured points.
+save to data/2019-06-05/16:57:46/15.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.37
+    y: -0.05
+    z: 0.3
+  orientation:
+    x: 0.07248628780809688
+    y: 0.10442775782574526
+    z: 0.08578270525487285
+    w: 0.9881709917592425)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 23
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 23
+    Frame Timestamp: 8.10936e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1722990 measured points.
+save to data/2019-06-05/16:57:46/16.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.37
+    y: -0.05
+    z: 0.35
+  orientation:
+    x: 0.03908232550799322
+    y: 0.03791790761421439
+    z: 0.01823215502407396
+    w: 0.9983498347965133)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 24
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 24
+    Frame Timestamp: 8.11877e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1704342 measured points.
+save to data/2019-06-05/16:57:46/17.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.37
+    y: -0.05
+    z: 0.4
+  orientation:
+    x: 0.05166836442397915
+    y: 0.02270184045961136
+    z: 0.042615925346631923
+    w: 0.9974963105016216)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 25
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 25
+    Frame Timestamp: 8.13225e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1696169 measured points.
+save to data/2019-06-05/16:57:46/18.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.37
+    y: -0.05
+    z: 0.45
+  orientation:
+    x: 0.056555425030318025
+    y: 0.011077342776855183
+    z: 0.02489911341154021
+    w: 0.9980274598065744)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 26
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 26
+    Frame Timestamp: 8.14453e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1684972 measured points.
+save to data/2019-06-05/16:57:46/19.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.43333333333333335
+    y: -0.05
+    z: 0.3
+  orientation:
+    x: 0.07620343249225905
+    y: 0.06402992814069379
+    z: 0.02763120468408116
+    w: 0.9946505525592401)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 27
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 27
+    Frame Timestamp: 8.15471e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1648994 measured points.
+save to data/2019-06-05/16:57:46/20.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.43333333333333335
+    y: -0.05
+    z: 0.35
+  orientation:
+    x: 0.06514038818215687
+    y: 0.09127334107004072
+    z: 0.06206135634901831
+    w: 0.9917531422110596)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 28
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 28
+    Frame Timestamp: 8.16671e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1633916 measured points.
+save to data/2019-06-05/16:57:46/21.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.43333333333333335
+    y: -0.05
+    z: 0.4
+  orientation:
+    x: 0.034107314172213646
+    y: 0.08796269106962025
+    z: 0.04979694903419569
+    w: 0.9942934777854243)
+Please enter:
+xterm-256color
+Failed to connect to PhoXi Control application!!!
+There is no attached device, or the device is not ready!
+Failed to connect to PhoXi Control application!!!
+There is no attached device, or the device is not ready!
+Failed to connect to PhoXi Control application!!!
+There is no attached device, or the device is not ready!
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.43333333333333335
+    y: -0.05
+    z: 0.45
+  orientation:
+    x: 0.03214971985039974
+    y: 0.09885743057976032
+    z: 0.08143940516147277
+    w: 0.991242264645558)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 29
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 29
+    Frame Timestamp: 8.20985e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1607099 measured points.
+save to data/2019-06-05/16:57:46/23.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.4966666666666667
+    y: -0.05
+    z: 0.3
+  orientation:
+    x: 0.07833964464292513
+    y: 0.06087390439324086
+    z: 0.005539976930050483
+    w: 0.9950510421565104)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 30
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 30
+    Frame Timestamp: 8.22075e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1632864 measured points.
+save to data/2019-06-05/16:57:46/24.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.4966666666666667
+    y: -0.05
+    z: 0.35
+  orientation:
+    x: 0.02835685646272434
+    y: 0.025297544149772807
+    z: 0.031063417694547207
+    w: 0.9987947672233155)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 31
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 31
+    Frame Timestamp: 8.24769e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1609942 measured points.
+save to data/2019-06-05/16:57:46/25.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.4966666666666667
+    y: -0.05
+    z: 0.4
+  orientation:
+    x: 0.06548685734521482
+    y: 0.0034714751819434767
+    z: 0.028669893856234967
+    w: 0.9974354402974566)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 32
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 32
+    Frame Timestamp: 8.26253e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1568465 measured points.
+save to data/2019-06-05/16:57:46/26.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.4966666666666667
+    y: -0.05
+    z: 0.45
+  orientation:
+    x: 0.029241233098442496
+    y: 0.01134970589689613
+    z: 0.0022319817033195897
+    w: 0.999505454072469)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 33
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 33
+    Frame Timestamp: 8.27283e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1534174 measured points.
+save to data/2019-06-05/16:57:46/27.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.56
+    y: -0.05
+    z: 0.3
+  orientation:
+    x: 0.006088657553766781
+    y: 0.013540627995405138
+    z: 0.0684933247207587
+    w: 0.997541098958524)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 34
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 34
+    Frame Timestamp: 8.28262e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1637807 measured points.
+save to data/2019-06-05/16:57:46/28.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.56
+    y: -0.05
+    z: 0.35
+  orientation:
+    x: 0.07464924498706642
+    y: 0.08379693861509081
+    z: 0.025878875878888027
+    w: 0.9933457842487904)
+Please enter:
+[ INFO] [1559725456.907473266]: ABORTED: Solution found but controller failed during execution
+publishing and latching message for 3.0 seconds
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.56
+    y: -0.05
+    z: 0.4
+  orientation:
+    x: 0.06593978524422253
+    y: 0.030541033399844496
+    z: 0.02559712081823316
+    w: 0.9970275710363441)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 35
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 35
+    Frame Timestamp: 8.30513e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1548440 measured points.
+save to data/2019-06-05/16:57:46/30.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.56
+    y: -0.05
+    z: 0.45
+  orientation:
+    x: 0.024409639430006187
+    y: 0.06393693200651915
+    z: 0.06404284667323303
+    w: 0.9955976858241887)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 36
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 36
+    Frame Timestamp: 8.31405e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1509113 measured points.
+save to data/2019-06-05/16:57:46/31.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.37
+    y: 0.0
+    z: 0.3
+  orientation:
+    x: 0.08148702677365537
+    y: 0.02381581196789959
+    z: 0.07276609697871377
+    w: 0.9937292220209607)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 37
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 37
+    Frame Timestamp: 8.32617e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1726955 measured points.
+save to data/2019-06-05/16:57:46/32.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.37
+    y: 0.0
+    z: 0.35
+  orientation:
+    x: 0.06526109889747467
+    y: 0.04727559210195082
+    z: 0.06206913257202109
+    w: 0.9948132639565381)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 38
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 38
+    Frame Timestamp: 8.33589e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1723444 measured points.
+save to data/2019-06-05/16:57:46/33.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.37
+    y: 0.0
+    z: 0.4
+  orientation:
+    x: 0.06627577248125957
+    y: 0.08667147832826161
+    z: 0.017544477686741854
+    w: 0.993875127030104)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 39
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 39
+    Frame Timestamp: 8.34499e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1727176 measured points.
+save to data/2019-06-05/16:57:46/34.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.37
+    y: 0.0
+    z: 0.45
+  orientation:
+    x: -0.0057517917158243035
+    y: 0.09888212314440109
+    z: 0.09608894581846682
+    w: 0.9904323081897164)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 40
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 40
+    Frame Timestamp: 8.35759e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1724070 measured points.
+save to data/2019-06-05/16:57:46/35.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.43333333333333335
+    y: 0.0
+    z: 0.3
+  orientation:
+    x: 0.07102054811890254
+    y: 0.04442128770303097
+    z: 0.007053535991350858
+    w: 0.996460274458402)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 41
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 41
+    Frame Timestamp: 8.36797e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1672689 measured points.
+save to data/2019-06-05/16:57:46/36.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.43333333333333335
+    y: 0.0
+    z: 0.35
+  orientation:
+    x: 0.08965494833729791
+    y: 0.06534202904912798
+    z: 0.052554236070739876
+    w: 0.9924366285810898)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 42
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 42
+    Frame Timestamp: 8.37884e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1662313 measured points.
+save to data/2019-06-05/16:57:46/37.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.43333333333333335
+    y: 0.0
+    z: 0.4
+  orientation:
+    x: 0.06934725052702724
+    y: 0.012052472848781677
+    z: 0.027585988235934007
+    w: 0.9971382602205264)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 43
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 43
+    Frame Timestamp: 8.38973e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1640255 measured points.
+save to data/2019-06-05/16:57:46/38.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.43333333333333335
+    y: 0.0
+    z: 0.45
+  orientation:
+    x: 0.003941270246278358
+    y: 0.09395894788870117
+    z: 0.0746656296117257
+    w: 0.9927644364375562)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 44
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 44
+    Frame Timestamp: 8.40098e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1644479 measured points.
+save to data/2019-06-05/16:57:46/39.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.4966666666666667
+    y: 0.0
+    z: 0.3
+  orientation:
+    x: 0.010452926230862617
+    y: 0.03617187225212439
+    z: 0.014210712350410222
+    w: 0.9991898656639199)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 45
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 45
+    Frame Timestamp: 8.41013e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1646964 measured points.
+save to data/2019-06-05/16:57:46/40.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.4966666666666667
+    y: 0.0
+    z: 0.35
+  orientation:
+    x: 0.08452087452717233
+    y: 0.08239910679734094
+    z: 0.07214080462635185
+    w: 0.9903849318704444)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 46
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 46
+    Frame Timestamp: 8.41908e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1608332 measured points.
+save to data/2019-06-05/16:57:46/41.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.4966666666666667
+    y: 0.0
+    z: 0.4
+  orientation:
+    x: 0.01767924269535235
+    y: 0.018162240421338724
+    z: 0.051799587996760044
+    w: 0.9983358052699314)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 47
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 47
+    Frame Timestamp: 8.42792e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1590214 measured points.
+save to data/2019-06-05/16:57:46/42.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.4966666666666667
+    y: 0.0
+    z: 0.45
+  orientation:
+    x: 0.04881881092610614
+    y: 0.06922833684321644
+    z: 0.08359477659400409
+    w: 0.9928927809204182)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 48
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 48
+    Frame Timestamp: 8.44084e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1561342 measured points.
+save to data/2019-06-05/16:57:46/43.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.56
+    y: 0.0
+    z: 0.3
+  orientation:
+    x: 0.09215165336196858
+    y: 0.08192558449436807
+    z: 0.07834129642619221
+    w: 0.9892719103776146)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 49
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 49
+    Frame Timestamp: 8.45196e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1624584 measured points.
+save to data/2019-06-05/16:57:46/44.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.56
+    y: 0.0
+    z: 0.35
+  orientation:
+    x: 0.08073636360255274
+    y: 0.06553768515180733
+    z: 0.03340321641867774
+    w: 0.994017442779585)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 50
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 50
+    Frame Timestamp: 8.46979e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1595418 measured points.
+save to data/2019-06-05/16:57:46/45.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.56
+    y: 0.0
+    z: 0.4
+  orientation:
+    x: 0.04051306806153189
+    y: 0.02454995159846126
+    z: 0.036527471667861494
+    w: 0.9982092641356864)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 51
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 51
+    Frame Timestamp: 8.48364e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1572925 measured points.
+save to data/2019-06-05/16:57:46/46.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.56
+    y: 0.0
+    z: 0.45
+  orientation:
+    x: 0.009661525127030505
+    y: 0.03797524636146314
+    z: 0.07457624536589913
+    w: 0.9964451411006685)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 52
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 52
+    Frame Timestamp: 8.49481e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1537228 measured points.
+save to data/2019-06-05/16:57:46/47.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.37
+    y: 0.05000000000000002
+    z: 0.3
+  orientation:
+    x: 0.05634985885770702
+    y: 0.09942456443804512
+    z: 0.08489442619593644
+    w: 0.9898143188466634)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 53
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 53
+    Frame Timestamp: 8.50619e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1741151 measured points.
+save to data/2019-06-05/16:57:46/48.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.37
+    y: 0.05000000000000002
+    z: 0.35
+  orientation:
+    x: 0.09269991153648856
+    y: 0.052115575774407584
+    z: 0.027603659577683775
+    w: 0.9939460403566929)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 54
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 54
+    Frame Timestamp: 8.51551e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1730045 measured points.
+save to data/2019-06-05/16:57:46/49.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.37
+    y: 0.05000000000000002
+    z: 0.4
+  orientation:
+    x: 0.007487287360912146
+    y: 0.006447582327553371
+    z: 0.040137341337502325
+    w: 0.9991453162780984)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 55
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 55
+    Frame Timestamp: 8.59179e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1718236 measured points.
+save to data/2019-06-05/16:57:46/50.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.37
+    y: 0.05000000000000002
+    z: 0.45
+  orientation:
+    x: 0.04076977411578442
+    y: 0.08439546014828739
+    z: 0.046162786481941644
+    w: 0.9945271383773946)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 56
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 56
+    Frame Timestamp: 8.60398e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1734093 measured points.
+save to data/2019-06-05/16:57:46/51.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.43333333333333335
+    y: 0.05000000000000002
+    z: 0.3
+  orientation:
+    x: 0.003898319076378257
+    y: 0.0367231844375027
+    z: 0.09370395662776271
+    w: 0.9949149608612036)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 57
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 57
+    Frame Timestamp: 8.61433e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1689494 measured points.
+save to data/2019-06-05/16:57:46/52.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.43333333333333335
+    y: 0.05000000000000002
+    z: 0.35
+  orientation:
+    x: 0.07425867721494822
+    y: 0.08659489475412764
+    z: 0.017802693642958188
+    w: 0.9933126583104953)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 58
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 58
+    Frame Timestamp: 8.624e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1686663 measured points.
+save to data/2019-06-05/16:57:46/53.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.43333333333333335
+    y: 0.05000000000000002
+    z: 0.4
+  orientation:
+    x: 0.0205945409615654
+    y: 0.10173068745371658
+    z: 0.07865040817732419
+    w: 0.9914841629629375)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 59
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 59
+    Frame Timestamp: 8.6339e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1678121 measured points.
+save to data/2019-06-05/16:57:46/54.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.43333333333333335
+    y: 0.05000000000000002
+    z: 0.45
+  orientation:
+    x: 0.08441981355352342
+    y: 0.041255091601995496
+    z: 0.060250173695170044
+    w: 0.993751090095604)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 60
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 60
+    Frame Timestamp: 8.64506e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1659095 measured points.
+save to data/2019-06-05/16:57:46/55.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.4966666666666667
+    y: 0.05000000000000002
+    z: 0.3
+  orientation:
+    x: 0.016416066433575266
+    y: 0.054030029176306185
+    z: 0.09803781321901658
+    w: 0.9935793153489504)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 61
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 61
+    Frame Timestamp: 8.6557e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1651894 measured points.
+save to data/2019-06-05/16:57:46/56.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.4966666666666667
+    y: 0.05000000000000002
+    z: 0.35
+  orientation:
+    x: 0.07639399282832424
+    y: 0.05650054529580367
+    z: 0.03499944995854635
+    w: 0.9948601332567417)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 62
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 62
+    Frame Timestamp: 8.66499e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1631315 measured points.
+save to data/2019-06-05/16:57:46/57.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.4966666666666667
+    y: 0.05000000000000002
+    z: 0.4
+  orientation:
+    x: 0.02472703949236537
+    y: 0.04803348300138213
+    z: 0.07100689170109145
+    w: 0.9960117365571796)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 63
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 63
+    Frame Timestamp: 8.67582e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1611490 measured points.
+save to data/2019-06-05/16:57:46/58.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.4966666666666667
+    y: 0.05000000000000002
+    z: 0.45
+  orientation:
+    x: 0.06401243762131395
+    y: 0.08073163123190595
+    z: 0.027777281708671085
+    w: 0.9942903168437728)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 64
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 64
+    Frame Timestamp: 8.68593e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1599200 measured points.
+save to data/2019-06-05/16:57:46/59.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.56
+    y: 0.05000000000000002
+    z: 0.3
+  orientation:
+    x: 0.07142144004505784
+    y: 0.05031994286128963
+    z: 0.07293045538536588
+    w: 0.9935029088682176)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 65
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 65
+    Frame Timestamp: 8.69615e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1637588 measured points.
+save to data/2019-06-05/16:57:46/60.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.56
+    y: 0.05000000000000002
+    z: 0.35
+  orientation:
+    x: 0.08819510105496313
+    y: 0.021273242731380752
+    z: 0.018664195340638526
+    w: 0.9957011203699045)
+Please enter:
+xterm-256color
+There is no attached device, or the device is not ready!
+There is no attached device, or the device is not ready!
+There is no attached device, or the device is not ready!
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.56
+    y: 0.05000000000000002
+    z: 0.4
+  orientation:
+    x: 0.06266443580134545
+    y: 0.03170503243194137
+    z: 0.0401580332492144
+    w: 0.9967222741414699)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 66
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 66
+    Frame Timestamp: 8.738e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1585583 measured points.
+save to data/2019-06-05/16:57:46/62.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.56
+    y: 0.05000000000000002
+    z: 0.45
+  orientation:
+    x: -0.002227963061066869
+    y: 0.0960708987526691
+    z: 0.05996216289587316
+    w: 0.9935642694935752)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 67
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 67
+    Frame Timestamp: 8.77436e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1551343 measured points.
+save to data/2019-06-05/16:57:46/63.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.37
+    y: 0.1
+    z: 0.3
+  orientation:
+    x: 0.013806925359147576
+    y: 0.012397241130156965
+    z: 0.007267801958136861
+    w: 0.9998014084202849)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 68
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 68
+    Frame Timestamp: 8.78495e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1737639 measured points.
+save to data/2019-06-05/16:57:46/64.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.37
+    y: 0.1
+    z: 0.35
+  orientation:
+    x: 0.09637905185487078
+    y: 0.037625258315883175
+    z: 0.07300655868576142
+    w: 0.9919503317651956)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 69
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 69
+    Frame Timestamp: 8.79395e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1728602 measured points.
+save to data/2019-06-05/16:57:46/65.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.37
+    y: 0.1
+    z: 0.4
+  orientation:
+    x: 0.09152958825692872
+    y: 0.010485721072846838
+    z: 0.07480058646077914
+    w: 0.9929336616271114)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 70
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 70
+    Frame Timestamp: 8.80394e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1719529 measured points.
+save to data/2019-06-05/16:57:46/66.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.37
+    y: 0.1
+    z: 0.45
+  orientation:
+    x: 0.08689809148694042
+    y: 0.06166027546360173
+    z: 0.0827831610243564
+    w: 0.9908550249034899)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 71
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 71
+    Frame Timestamp: 8.8143e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1724521 measured points.
+save to data/2019-06-05/16:57:46/67.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.43333333333333335
+    y: 0.1
+    z: 0.3
+  orientation:
+    x: 0.025420793473757537
+    y: 0.075374227095367
+    z: 0.07812822423629605
+    w: 0.9937648060414616)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 72
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 72
+    Frame Timestamp: 8.82474e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1707868 measured points.
+save to data/2019-06-05/16:57:46/68.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.43333333333333335
+    y: 0.1
+    z: 0.35
+  orientation:
+    x: 0.08118442632384067
+    y: 0.05341651045317393
+    z: 0.025725681487775306
+    w: 0.9949341458837686)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 73
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 73
+    Frame Timestamp: 8.83451e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1698780 measured points.
+save to data/2019-06-05/16:57:46/69.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.43333333333333335
+    y: 0.1
+    z: 0.4
+  orientation:
+    x: 0.07747764067894064
+    y: 0.05312922058452191
+    z: 0.07735195563252154
+    w: 0.9925679705061667)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 74
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 74
+    Frame Timestamp: 8.84871e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1685682 measured points.
+save to data/2019-06-05/16:57:46/70.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.43333333333333335
+    y: 0.1
+    z: 0.45
+  orientation:
+    x: 0.09193417554485374
+    y: 0.04677141548631643
+    z: 0.07108858615191528
+    w: 0.992122449589372)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 75
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 75
+    Frame Timestamp: 8.85876e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1671678 measured points.
+save to data/2019-06-05/16:57:46/71.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.4966666666666667
+    y: 0.1
+    z: 0.3
+  orientation:
+    x: 0.037310413452063075
+    y: 0.053342214182360424
+    z: 0.06819302125351223
+    w: 0.9955462084134907)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 76
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 76
+    Frame Timestamp: 8.86827e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1665401 measured points.
+save to data/2019-06-05/16:57:46/72.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.4966666666666667
+    y: 0.1
+    z: 0.35
+  orientation:
+    x: 0.016541692271421833
+    y: 0.07203639139475704
+    z: 0.05112929413374743
+    w: 0.9959532750149496)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 77
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 77
+    Frame Timestamp: 8.87682e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1652116 measured points.
+save to data/2019-06-05/16:57:46/73.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.4966666666666667
+    y: 0.1
+    z: 0.4
+  orientation:
+    x: 0.03609611671163627
+    y: 0.09700706841126787
+    z: 0.05951508338872671
+    w: 0.9928467423957358)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 78
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 78
+    Frame Timestamp: 8.88699e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1638720 measured points.
+save to data/2019-06-05/16:57:46/74.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.4966666666666667
+    y: 0.1
+    z: 0.45
+  orientation:
+    x: 0.048824181207384326
+    y: 0.020766760209394483
+    z: 0.08151805459056002
+    w: 0.9952586336101809)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 79
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 79
+    Frame Timestamp: 8.91503e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1691435 measured points.
+save to data/2019-06-05/16:57:46/75.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.56
+    y: 0.1
+    z: 0.3
+  orientation:
+    x: 0.04787484606043072
+    y: 0.08245626228117697
+    z: 0.07803716741206237
+    w: 0.9923805542369366)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 80
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 80
+    Frame Timestamp: 8.92601e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1745416 measured points.
+save to data/2019-06-05/16:57:46/76.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.56
+    y: 0.1
+    z: 0.35
+  orientation:
+    x: 0.03459911690541221
+    y: 0.03208651280160689
+    z: 0.06807134353865138
+    w: 0.9965639211783862)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 81
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 81
+    Frame Timestamp: 8.93543e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1709372 measured points.
+save to data/2019-06-05/16:57:46/77.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.56
+    y: 0.1
+    z: 0.4
+  orientation:
+    x: 0.060843971101724466
+    y: 0.04443672202946515
+    z: 0.06210726966002228
+    w: 0.9952216215352365)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 82
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 82
+    Frame Timestamp: 8.94619e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1666178 measured points.
+save to data/2019-06-05/16:57:46/78.ply
+******************************************************
+('tool pose: ', header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs:         0
+  frame_id: "panda_link0"
+pose:
+  position:
+    x: 0.56
+    y: 0.1
+    z: 0.45
+  orientation:
+    x: 0.03540344781280584
+    y: 0.05626654445170642
+    z: 0.0818603667487914
+    w: 0.9944242315099645)
+Please enter:
+xterm-256color
+Connection to the device 2019-04-002-LC3 was Successful!
+0 frames were cleared from the cyclic buffer
+Triggering the 0-th frame
+Frame was triggered, Frame Id: 83
+Waiting for frame 0
+Frame retrieved
+  Frame params:
+    Frame Index: 83
+    Frame Timestamp: 8.95845e+06
+    Frame Duration: 272.384
+    Frame Resolution: 2064 x 1544
+    Sensor Position: 0; 0; 0
+  Frame data:
+    PointCloud: 2064 x 1544 Type: float32C3
+    NormalMap: 2064 x 1544 Type: float32C3
+    DepthMap: 2064 x 1544 Type: float32C1
+    Texture: 2064 x 1544 Type: float32C1
+Your sample Point cloud has 1622374 measured points.
+save to data/2019-06-05/16:57:46/79.ply
+Collecting data Finished and data saved!
