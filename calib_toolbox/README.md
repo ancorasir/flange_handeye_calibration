@@ -29,11 +29,7 @@ The program will then read the coordinate from the file and apply calibration it
 
  The calibration process is divided into *Coarse Calibration* and *Fine Calibration*.
 
-
-
 In *Coarse Calibration*, calibration are done with only the points provided by the user. This can provide a basic, while not precise enough result of calibration.  
-
-
 
 For *Fine Calibration*, the program will obtain zig-zag path from between provided points. At first, all possible pairs of the *flag points* are made. Then, three extra points are interpolated with a given pair of points. Say we have two points :
 
@@ -59,8 +55,6 @@ Note that although intuitively moving robot to interpolated points should also h
 2. The number of points in the inlier set of the result of circle fitting.
 
 The standard of the criteria is obtained from *flag points*.
-
-
 
 ## Calibration
 
