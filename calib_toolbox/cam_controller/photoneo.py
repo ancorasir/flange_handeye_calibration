@@ -1,5 +1,5 @@
+"""code for photoneo driver"""
 import os
-
 
 class Photoneo_Controller:
     def __init__(self, cfg):
