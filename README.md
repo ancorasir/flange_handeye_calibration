@@ -2,7 +2,7 @@
 
 Flanged based hand-eye calibration is a method for hand-eye calibration between a robot arm and a 3D scanner based on the geometric features of the tool flange of the robot arm. The method depends on the high precision point cloud provided by the 3D scanner.
 
-This repository provides a toolbox written in python executing the hand-eye calibration process. The toolbox has been test on robot arm including Franka, UR5, UR5e, UR10e, Aubo-i5 and 3D scanners including Phoxi-S, Phoxi-M, .
+This repository provides a toolbox written in python executing the hand-eye calibration process. The toolbox has been test on robot arm including Franka, UR5, UR5e, UR10e, Aubo-i5 and 3D scanners including Phoxi-S, Phoxi-M, . Codes may require some adjustment depending on the versions of dependent packages.
 
 ## Overview of method
 
