@@ -1,10 +1,8 @@
+"""code for generating random waypoints for calibration"""
 import numpy as np
-
 
 def make_path_generator(cfg, pose_vec_curr):
     return PathGenerator(cfg, pose_vec_curr)
-
-
 class PathGenerator:
     def __init__(self, cfg, pose_vec_curr, num_segment=5):
         self.curr_idx = 0
